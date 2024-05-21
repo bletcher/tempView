@@ -37,6 +37,20 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:  
+          path: './dist'
+
+# https://github.com/allisonhorst/sf-wind-framework/blob/main/.github/workflows/actions.yml
+      - name: setup R
+        uses: r-lib/actions/setup-r@v2
+      
+      - name: install R packages
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          packages: |
+            any::readr 
+            any::dplyr
+  #  
 
   # Deployment job
   deploy:
