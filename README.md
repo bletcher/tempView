@@ -1,8 +1,39 @@
-# TempView
+# Temperature Raw Data Viewer
+
+Setup steps:
+
+## Enable command line R
+
+Add .R and .RScript to [Path](https://info201.github.io/r-intro.html#windows-command-line). Will need to update the path when R version is updated.  5.2.1.1 Windows Command-Line
+
+## Set up observable framework project
+
+1) In the terminal, go to root directory (one below the subdirectory you will create in the next step)
+2) Run `npm init "@observablehq"` and don't initialize git
+3) In vsCode, open the folder for the project and then publish to a new repo (from the `source control` badge)
+4) Go to Actions and hit `GitHub Pages Jekyll` to set up `jekyll-gh-pages.yml`
+   [or, in settings, in Build and deployment, set source as github actions and configure GitHub Pages Jekyll]
+5) In `jekyll-gh-pages.yml` add the bottom two lines as follows:
+   `  - name: Upload artifact  
+        uses: actions/upload-pages-artifact@v3  
+        with:  
+          path: './dist'  
+    `
+    to make the  /dist the source for the github.io page. Commit this change in github.
+6) In github on the settings/actions page, make sure `Github Actions` is selected in the source dropdopwn.
+7) Delete `./dist` from .gitignore.  
+8) In the terminal, run `npm run build` to build the site in /dist.  
+9) Run this in the terminal: `git lfs install`, `git lfs track "*.json"`, `git add .gitattributes` to track large data files.  
+10) Do normal commit/push cycle.
+
+Notes:
+1) to force rerun of cached objects, run: `rm docs/.observablehq/cache/data/*.csv` with approriate changes for specific files or file types.  
+
+## From Observable
 
 This is an [Observable Framework](https://observablehq.com/framework) project. To start the local preview server, run:
 
-```
+```js
 npm run dev
 ```
 

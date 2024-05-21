@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Raw flow and temperature data | Temperature Raw Data Viewer</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.css">
+<link rel="modulepreload" href="./_observablehq/client.js">
+<link rel="modulepreload" href="./_observablehq/runtime.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.js">
+<link rel="modulepreload" href="./_import/components/raw_data_flow_temp_plots.536fb703.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/_esm.js">
+<link rel="modulepreload" href="./_import/components/variables.a33c85b1.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.14/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/_esm.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/_esm.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/_esm.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/_esm.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/_esm.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/_esm.js">
+<script type="module">
+
+import {define} from "./_observablehq/client.js";
+import {registerFile} from "./_observablehq/stdlib.js";
+
+registerFile("./data/VA_site_info.csv", {"name":"./data/VA_site_info.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info.28267165.csv","lastModified":1716319813204});
+registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716323710457});
+registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716323809252});
+registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716324190367});
+registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.9cb5a404.csv","lastModified":1716324197733});
+registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.177ea851.csv","lastModified":1716323732699});
+registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.0e20b00c.csv","lastModified":1716323750878});
+registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.3b8f1275.csv","lastModified":1716323742265});
+
+define({id: "44407bc2", outputs: ["plotWaterDischarge","d3"], body: async () => {
+const [{plotWaterDischarge}, d3] = await Promise.all([import("./_import/components/raw_data_flow_temp_plots.536fb703.js"), import("./_npm/d3@7.9.0/_esm.js")]);
+//import * as tidyjs from "npm:tidyjs";
+return {plotWaterDischarge,d3};
+}});
+
+define({id: "9ee1e068", outputs: ["dt","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR"], body: async () => {
+const {dt, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR} = await import("./_import/components/variables.a33c85b1.js");
+
+return {dt,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR};
+}});
+
+define({id: "97878f4d", inputs: ["Inputs","Generators"], outputs: ["aggregators","selectAggregators","selectedAggregators"], body: (Inputs,Generators) => {
+const aggregators = ["Monthly", "Weekly", "Daily", "15 Minute"];
+const selectAggregators = (Inputs.select(aggregators, {value: "Daily", multiple: false, width: 90, label: "Select aggregation level"}));
+const selectedAggregators = Generators.input(selectAggregators);
+return {aggregators,selectAggregators,selectedAggregators};
+}});
+
+define({id: "b0de387a", inputs: ["dt","Inputs","Generators","d3"], outputs: ["sites","selectSites","selectedSites","years","selectYears","selectedYears","seasons","selectSeasons","selectedSeasons","ydays","selectYdays","selectedYdays"], body: (dt,Inputs,Generators,d3) => {
+const sites = [...new Set(dt.map(d => d.siteID))].sort();
+const selectSites = (Inputs.select(sites, {value: sites, multiple: 8, width: 100, label: "Select sites"}));
+const selectedSites = Generators.input(selectSites);
+
+const years = [...new Set(dt.map(d => d.year))].sort();
+const selectYears = (Inputs.select(years, {value: years, multiple: true, width: 80, label: "Select years"}));
+const selectedYears = Generators.input(selectYears);
+
+const seasons = ["Spring", "Summer", "Autumn", "Winter"];
+const selectSeasons = (Inputs.select(seasons, {value: seasons, multiple: true, width: 80, label: "Select seasons"}));
+const selectedSeasons = Generators.input(selectSeasons);
+
+
+const ydays = [...new Set(dt.map(d => d.yday))].sort((function(a, b) {
+  return a - b;
+}));
+const selectYdays = (Inputs.select(ydays, {value: d3.range(1,366,60), multiple: true, width: 80, label: "Select day(s) of year"}));
+const selectedYdays = Generators.input(selectYdays);
+return {sites,selectSites,selectedSites,years,selectYears,selectedYears,seasons,selectSeasons,selectedSeasons,ydays,selectYdays,selectedYdays};
+}});
+
+define({id: "40319526", inline: true, inputs: ["view","selectSites"], body: (view,selectSites) => {
+view(selectSites)
+}});
+
+define({id: "f0ce0c99", inline: true, inputs: ["view","selectYears"], body: (view,selectYears) => {
+view(selectYears)
+}});
+
+define({id: "5d5bdc22", inline: true, inputs: ["selectSeasons","display"], body: async (selectSeasons,display) => {
+display(await(
+selectSeasons
+))
+}});
+
+define({id: "d5161e61", inputs: ["display","aggregatedData"], body: (display,aggregatedData) => {
+display(aggregatedData)
+}});
+
+define({id: "4bb25ab6", inputs: ["dt","selectedSites","selectedYears","selectedSeasons","dtYDAY","dtYDAY_Week","dtYDAY_Month"], outputs: ["filterBySiteID_year","filterBySiteID_year_season","filterBySiteID_year_yday","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered"], body: async (dt,selectedSites,selectedYears,selectedSeasons,dtYDAY,dtYDAY_Week,dtYDAY_Month) => {
+const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.a33c85b1.js");
+
+const dtFiltered = filterBySiteID_year_season(dt, selectedSites, selectedYears, selectedSeasons)
+const dtYDAYFiltered = filterBySiteID_year_season(dtYDAY, selectedSites, selectedYears, selectedSeasons)
+const dtYDAY_Week_Filtered = filterBySiteID_year_season(dtYDAY_Week, selectedSites, selectedYears, selectedSeasons)
+const dtYDAY_Month_Filtered = filterBySiteID_year_season(dtYDAY_Month, selectedSites, selectedYears, selectedSeasons)
+return {filterBySiteID_year,filterBySiteID_year_season,filterBySiteID_year_yday,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered};
+}});
+
+define({id: "7470248a", inline: true, inputs: ["selectAggregators","display"], body: async (selectAggregators,display) => {
+display(await(
+selectAggregators
+))
+}});
+
+define({id: "f5b68d5d", inputs: ["selectedAggregators","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered"], outputs: ["getAggregatedData","aggregatedData"], body: async (selectedAggregators,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered) => {
+const {getAggregatedData} = await import("./_import/components/variables.a33c85b1.js");
+const aggregatedData = getAggregatedData(selectedAggregators, dtFiltered, dtYDAYFiltered, dtYDAY_Week_Filtered, dtYDAY_Month_Filtered)
+return {getAggregatedData,aggregatedData};
+}});
+
+define({id: "e15f97bc", inputs: ["plotWaterDischarge","aggregatedData","display"], body: async (plotWaterDischarge,aggregatedData,display) => {
+display(await(
+plotWaterDischarge(aggregatedData)
+))
+}});
+
+</script>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Temperature Raw Data Viewer</a></li>
+  </ol>
+  <div id="observablehq-search"><input type="search" placeholder="Search"></div>
+  <div id="observablehq-search-results"></div>
+  <script>{const o=document.querySelector("#observablehq-search");o.setAttribute("data-shortcut",`${/Mac|iPhone/.test(navigator.platform)?"\u2318":"Alt-"}K`);const t=o.querySelector("input"),r=()=>import("./_observablehq/search.js");t.addEventListener("focus",r,{once:!0}),t.addEventListener("keydown",r,{once:!0});const c=document.querySelector("#observablehq-sidebar-toggle");addEventListener("keydown",e=>{(e.code==="KeyK"&&e.metaKey&&!e.altKey&&!e.ctrlKey||e.key==="/"&&!e.metaKey&&!e.altKey&&!e.ctrlKey&&e.target===document.body)&&(c.checked?t.focus():(c.click(),t.focus(),c.click()),t.select(),e.preventDefault())});}</script>
+  <ol>
+    <section class="observablehq-section-active">
+      <summary>Chapters</summary>
+      <ol>
+    <li class="observablehq-link"><a href="./raw_data">Temperature</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./raw_data_flow_temp">Flow and temperature</a></li>
+    <li class="observablehq-link"><a href="./mutable_test">Mutable test</a></li>
+      </ol>
+    </section>
+  </ol>
+</nav>
+<script>{Object.assign(document.createElement("a"),{href:""}).password&&location.replace(location.href);const e=document.querySelector("#observablehq-sidebar"),t=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?t.checked=r==="true":t.indeterminate=!0;for(const o of document.querySelectorAll("#observablehq-sidebar summary")){const s=o.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${o.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#plot-water-temperature%2Fdischarge">Plot water temperature/discharge</a></li>
+</ol>
+</nav>
+</aside>
+<div id="observablehq-center">
+<main id="observablehq-main" class="observablehq">
+<div id="cell-44407bc2" class="observablehq observablehq--block"></div>
+<div id="cell-9ee1e068" class="observablehq observablehq--block"></div>
+<div id="cell-97878f4d" class="observablehq observablehq--block"></div>
+<h2 id="plot-water-temperature%2Fdischarge" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-water-temperature%2Fdischarge">Plot water temperature/discharge</a></h2>
+<div id="cell-b0de387a" class="observablehq observablehq--block"></div>
+<hr>
+<div class="grid grid-cols-4">
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <span id="cell-40319526"><span class="observablehq-loading"></span></span>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <span id="cell-f0ce0c99"><span class="observablehq-loading"></span></span>
+  </div>
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <span id="cell-5d5bdc22"><span class="observablehq-loading"></span></span>
+  </div>
+</div>
+<div id="cell-d5161e61" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<hr>
+<div id="cell-4bb25ab6" class="observablehq observablehq--block"></div>
+<div class="grid grid-cols-2"> 
+  <div style="display: flex; flex-direction: column; align-items: flex-start;">
+    <span id="cell-7470248a"><span class="observablehq-loading"></span></span>
+  </div>
+</div>
+<div id="cell-f5b68d5d" class="observablehq observablehq--block"></div>
+<div id="cell-e15f97bc" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<p><em>Could add images as pop-up</em><br>
+<em>for hysterisis, divide temperature by flow, as in <a href="https://doi.org/10.1016/j.scitotenv.2015.11.028" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.scitotenv.2015.11.028</a>. Add option button</em></p>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./raw_data"><span>Temperature</span></a><a rel="next" href="./mutable_test"><span>Mutable test</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-21T16:43:00">May 21, 2024</a>.</div>
+</footer>
+</div>
