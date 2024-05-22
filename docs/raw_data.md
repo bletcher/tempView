@@ -379,7 +379,7 @@ display(timeSeriesHover)
 plotCurveHover(dtHOUR, dtHOUR_params_pred, timeSeriesHover)
 ```
 
-*add capability to add days to the graph by clicking*
+*Add capability to add days to the graph by clicking*
 
 ---
 
