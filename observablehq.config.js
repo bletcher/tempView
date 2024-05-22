@@ -11,8 +11,7 @@ export default {
        name: "Chapters",
        pages: [
          {name: "Temperature", path: "/raw_data"},
-         {name: "Flow and temperature", path: "/raw_data_flow_temp"},
-         {name: "Mutable test", path: "/mutable_test"}
+         {name: "Flow and temperature", path: "/raw_data_flow_temp"}
        ]
      }
    ],

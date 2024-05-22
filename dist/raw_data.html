@@ -16,11 +16,13 @@
 <link rel="modulepreload" href="./_observablehq/stdlib.js">
 <link rel="modulepreload" href="./_import/components/raw_data_plots.73e3d57d.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/_esm.js">
-<link rel="modulepreload" href="./_import/components/variables.a33c85b1.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/duckdb.js">
+<link rel="modulepreload" href="./_import/components/variables.b5a5640d.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.14/_esm.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/_esm.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.js">
 <link rel="modulepreload" href="./_npm/leaflet@1.9.4/_esm.js">
+<link rel="modulepreload" href="./_npm/@duckdb/duckdb-wasm@1.28.0/_esm.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/_esm.js">
 <link rel="modulepreload" href="./_npm/isoformat@0.2.1/_esm.js">
 <link rel="modulepreload" href="./_npm/d3-array@3.2.4/_esm.js">
@@ -53,16 +55,19 @@
 <link rel="modulepreload" href="./_npm/d3-transition@3.0.1/_esm.js">
 <link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/_esm.js">
 <link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/_esm.js">
+<link rel="modulepreload" href="./_npm/apache-arrow@16.1.0/_esm.js">
 <link rel="modulepreload" href="./_npm/internmap@2.0.3/_esm.js">
 <link rel="modulepreload" href="./_npm/delaunator@5.0.1/_esm.js">
 <link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/_esm.js">
+<link rel="modulepreload" href="./_npm/tslib@2.6.2/_esm.js">
+<link rel="modulepreload" href="./_npm/flatbuffers@24.3.25/_esm.js">
 <link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/_esm.js">
 <script type="module">
 
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/VA_site_info.csv", {"name":"./data/VA_site_info.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info.28267165.csv","lastModified":1716319813204});
+registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716384118626});
 registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716323710457});
 registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716323809252});
 registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716324190367});
@@ -71,17 +76,18 @@ registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/c
 registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.0e20b00c.csv","lastModified":1716323750878});
 registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.3b8f1275.csv","lastModified":1716323742265});
 
-define({id: "16ee02bd", outputs: ["plotTimeSeries","plotAirWater","plotWaterDischarge","plotCurve","plotCurveHover","plotPhaseAmp","d3"], body: async () => {
-const [{plotTimeSeries, plotAirWater, plotWaterDischarge, plotCurve, plotCurveHover, plotPhaseAmp}, d3] = await Promise.all([import("./_import/components/raw_data_plots.73e3d57d.js"), import("./_npm/d3@7.9.0/_esm.js")]);
+define({id: "282a7b5b", outputs: ["plotTimeSeries","plotAirWater","plotWaterDischarge","plotCurve","plotCurveHover","plotPhaseAmp","d3","DuckDBClient"], body: async () => {
+const [{plotTimeSeries, plotAirWater, plotWaterDischarge, plotCurve, plotCurveHover, plotPhaseAmp}, d3, {DuckDBClient}] = await Promise.all([import("./_import/components/raw_data_plots.73e3d57d.js"), import("./_npm/d3@7.9.0/_esm.js"), import("./_observablehq/stdlib/duckdb.js")]);
 //import {addMap} from "./components/raw_data_map.js";
 //import {interval} from 'https://observablehq.com/@mootari/range-slider';
 //import {Mutable} from "@observablehq/stdlib";
 //import * as tidyjs from "npm:tidyjs";
-return {plotTimeSeries,plotAirWater,plotWaterDischarge,plotCurve,plotCurveHover,plotPhaseAmp,d3};
+
+return {plotTimeSeries,plotAirWater,plotWaterDischarge,plotCurve,plotCurveHover,plotPhaseAmp,d3,DuckDBClient};
 }});
 
-define({id: "a6c004ae", outputs: ["dt","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","dtHOUR_ampPhase","dtHOUR_params_pred","VA_data"], body: async () => {
-const [{dt, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR, dtHOUR_ampPhase, dtHOUR_params_pred}, {VA_data}] = await Promise.all([import("./_import/components/variables.a33c85b1.js"), import("./_import/components/variables.a33c85b1.js")]);
+define({id: "ee2a50b8", outputs: ["dt","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","dtHOUR_ampPhase","dtHOUR_params_pred","VA_data"], body: async () => {
+const [{dt, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR, dtHOUR_ampPhase, dtHOUR_params_pred}, {VA_data}] = await Promise.all([import("./_import/components/variables.b5a5640d.js"), import("./_import/components/variables.b5a5640d.js")]);
 
 
 return {dt,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,dtHOUR_ampPhase,dtHOUR_params_pred,VA_data};
@@ -111,20 +117,126 @@ dt.filter(d => d.AirTemperature_HOBO_degF).length.toLocaleString("en-US")
 ))
 }});
 
-define({id: "923f3ecb", inputs: ["display","VA_data"], body: (display,VA_data) => {
-display(VA_data)
-}});
-
 define({id: "51aeabef", inline: true, inputs: ["div_map1","display"], body: async (div_map1,display) => {
 display(await(
 div_map1
 ))
 }});
 
-define({id: "4d60243e", inputs: ["display","L"], outputs: ["lat1","lon1","mag1","div_map1","map1","basemaps1","initialView1"], body: (display,L) => {
-// Map1
+define({id: "8d9103ef", inline: true, inputs: ["dtFiltered","display"], body: async (dtFiltered,display) => {
+display(await(
+dtFiltered.length.toLocaleString("en-US")
+))
+}});
+
+define({id: "f60bbe75", inline: true, inputs: ["selectedSites","display"], body: async (selectedSites,display) => {
+display(await(
+selectedSites.length.toLocaleString("en-US")
+))
+}});
+
+define({id: "bc09e940", inline: true, inputs: ["selectedYears","display"], body: async (selectedYears,display) => {
+display(await(
+selectedYears.length.toLocaleString("en-US")
+))
+}});
+
+define({id: "8faaaddf", inline: true, inputs: ["selectedSeasons","display"], body: async (selectedSeasons,display) => {
+display(await(
+selectedSeasons.length.toLocaleString("en-US")
+))
+}});
+
+define({id: "7bc79817", inputs: ["dt","Inputs","markersSelected","Generators","d3"], outputs: ["sites","selectSites","selectedSites","years","selectYears","selectedYears","seasons","selectSeasons","selectedSeasons","ydays","selectYdays","selectedYdays","groupSiteID","showAir","selectedShowAir","showWater","selectedShowWater","showAWLines","selectedShowAWLines","facetDaily","selectedFacetDaily","facetYearly","selectedFacetYearly","aggregators","selectAggregators","selectedAggregators","selectPValue","selectedPValue","selectRSAir","selectedRSAir","selectRSWater","selectedRSWater"], body: (dt,Inputs,markersSelected,Generators,d3) => {
+////////////
+// Inputs //
+////////////
+
+//import { getInputs } from "/components/inputs.js";//,
+
+const sites = [...new Set(dt.map(d => d.siteID))].sort();
+const selectSites = Inputs.select(sites, {
+  //value: sites,
+  value: markersSelected, 
+  multiple: 8, width: 100, label: "Select sites"});
+const selectedSites = Generators.input(selectSites);
+
+const years = [...new Set(dt.map(d => d.year))].sort();
+const selectYears = (Inputs.select(years, {value: years, multiple: true, width: 80, label: "Select years"}));
+const selectedYears = Generators.input(selectYears);
+
+const seasons = ["Spring", "Summer", "Autumn", "Winter"];//[...new Set(dt.map(d => d.season))];
+const selectSeasons = (Inputs.select(seasons, {value: seasons, multiple: true, width: 80, label: "Select seasons"}));
+const selectedSeasons = Generators.input(selectSeasons);
+
+const ydays = [...new Set(dt.map(d => d.yday))].sort((function(a, b) {
+  return a - b;
+}));
+const selectYdays = (Inputs.select(ydays, {value: d3.range(1,366,60), multiple: true, width: 80, label: "Select day(s) of year"}));
+const selectedYdays = Generators.input(selectYdays);
+
+const groupSiteID = [...new Set(dt.map(d => d.siteID))].sort() // for the colorScale
+
+const showAir = (Inputs.radio([true, false], {label: "Show Air Temp?", value: true}));
+const selectedShowAir = Generators.input(showAir);
+
+const showWater = (Inputs.radio([true, false], {label: "Show Water Temp?", value: true}));
+const selectedShowWater = Generators.input(showWater);
+
+const showAWLines = (Inputs.radio([true, false], {label: "Show lines?", value: true}));
+const selectedShowAWLines = Generators.input(showAWLines);
+
+const facetDaily = (Inputs.radio([true, false], {label: "Graph by day? [not yet implemented]", value: true}));
+const selectedFacetDaily = Generators.input(facetDaily);
+
+const facetYearly = (Inputs.radio([true, false], {label: "Facet by year?", value: false}));
+const selectedFacetYearly = Generators.input(facetYearly);
+
+const aggregators = ["Monthly", "Weekly", "Daily", "15 Minute"];
+const selectAggregators = (Inputs.select(aggregators, {value: "Daily", multiple: false, width: 90, label: "Select aggregation level"}));
+const selectedAggregators = Generators.input(selectAggregators);
+
+const selectPValue = (Inputs.range([0.0001, 1], {value: 1, step: 0.01, width: 220, label: "Select minimum p-value of max(ABC)"}));
+const selectedPValue = Generators.input(selectPValue);
+
+const selectRSAir = (Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, width: 200, label: "Select minimum r-squared for air data fits"}));
+const selectedRSAir = Generators.input(selectRSAir);
+
+const selectRSWater = (Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, width: 200, label: "Select minimum r-squared for water data fits"}));
+const selectedRSWater = Generators.input(selectRSWater);
+
+return {sites,selectSites,selectedSites,years,selectYears,selectedYears,seasons,selectSeasons,selectedSeasons,ydays,selectYdays,selectedYdays,groupSiteID,showAir,selectedShowAir,showWater,selectedShowWater,showAWLines,selectedShowAWLines,facetDaily,selectedFacetDaily,facetYearly,selectedFacetYearly,aggregators,selectAggregators,selectedAggregators,selectPValue,selectedPValue,selectRSAir,selectedRSAir,selectRSWater,selectedRSWater};
+}});
+
+define({id: "3741b89f", inputs: ["dt","selectedSites","selectedYears","selectedSeasons","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","selectedYdays","dtHOUR_ampPhase","selectedPValue","selectedRSAir","selectedRSWater"], outputs: ["filterBySiteID_year","filterBySiteID_year_season","filterBySiteID_year_yday","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered","dtHOURFiltered","dtHOUR_ampPhase_Filtered"], body: async (dt,selectedSites,selectedYears,selectedSeasons,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,selectedYdays,dtHOUR_ampPhase,selectedPValue,selectedRSAir,selectedRSWater) => {
+const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.b5a5640d.js");
+//////////////////////
+// filtered objects //
+//////////////////////
+
+
+const dtFiltered = filterBySiteID_year_season(dt, selectedSites, selectedYears, selectedSeasons)
+const dtYDAYFiltered = filterBySiteID_year_season(dtYDAY, selectedSites, selectedYears, selectedSeasons)
+const dtYDAY_Week_Filtered = filterBySiteID_year_season(dtYDAY_Week, selectedSites, selectedYears, selectedSeasons)
+const dtYDAY_Month_Filtered = filterBySiteID_year_season(dtYDAY_Month, selectedSites, selectedYears, selectedSeasons)
+
+const dtHOURFiltered = filterBySiteID_year_yday(dtHOUR, selectedSites, selectedYears, selectedYdays)
+
+const dtHOUR_ampPhase_Filtered = filterBySiteID_year_season(dtHOUR_ampPhase, selectedSites, selectedYears, selectedSeasons).filter(
+  d => d.pMaxMax < selectedPValue &&
+  d.rSquared_air > selectedRSAir &&
+  d.rSquared_water > selectedRSWater 
+)
+return {filterBySiteID_year,filterBySiteID_year_season,filterBySiteID_year_yday,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered,dtHOURFiltered,dtHOUR_ampPhase_Filtered};
+}});
+
+define({id: "f581ce20", inputs: ["display","L"], outputs: ["lat1","lon1","mag1","div_map1","map1","basemaps1","initialView1"], body: (display,L) => {
+/////////
+// Map //
+/////////
+
   const lat1 = 38.5;
-  const lon1 = -78.5;
+  const lon1 = -78.0;
   const mag1 = 9.2;
 
   const div_map1 = display(document.createElement("div"));
@@ -183,11 +295,15 @@ define({id: "4d60243e", inputs: ["display","L"], outputs: ["lat1","lon1","mag1",
 return {lat1,lon1,mag1,div_map1,map1,basemaps1,initialView1};
 }});
 
-define({id: "a42d7fca", inputs: ["L","map1","VA_data","Mutable"], outputs: ["addMarkers","addClickListenersToMarkers","updateMarkerStyles","markers","markersSelected"], body: (L,map1,VA_data,Mutable) => {
+define({id: "e8aa0ef6", inputs: ["L","map1","VA_data","Mutable"], outputs: ["addMarkers","addClickListenersToMarkers","updateMarkerStyles","markers","markersSelected"], body: (L,map1,VA_data,Mutable) => {
+/////////////////////////////////
+// Add map markers and updates //
+/////////////////////////////////
+
 function addMarkers(dIn) {
   let markers = [];
   dIn.forEach(function(d) {
-    let marker = L.circleMarker([d.Latitude_dec_deg, d.Longitude_dec_deg], {
+    let marker = L.circleMarker([d.lat, d.lon], {
       color: 'blue',
       fillColor: '#30f',
       fillOpacity: 0.5,
@@ -196,7 +312,7 @@ function addMarkers(dIn) {
 
     // Add a 'selected' property to the marker
     marker.selected = false;
-    marker.siteID = d.Site_ID;
+    marker.siteID = d.siteID;
 
     markers.push(marker);
   });
@@ -240,7 +356,11 @@ let markersSelected = Mutable([]);
 return {addMarkers,addClickListenersToMarkers,updateMarkerStyles,markers,markersSelected};
 }});
 
-define({id: "c60ef53a", inputs: ["selectSites","markers","markersSelected","updateMarkerStyles"], body: (selectSites,markers,markersSelected,updateMarkerStyles) => {
+define({id: "6360fa26", inputs: ["selectSites","markers","markersSelected","updateMarkerStyles"], body: (selectSites,markers,markersSelected,updateMarkerStyles) => {
+//////////////////////////////////////////////
+// Event listener for site dropdown updates //
+//////////////////////////////////////////////
+
 selectSites.addEventListener('change', function() {
   let selectedSite = this.value;
   console.log("selectSites event", selectedSite)
@@ -276,85 +396,6 @@ selectSeasons
 ))
 }});
 
-define({id: "c1e0fe10", inputs: ["dt","Inputs","markersSelected","Generators","d3"], outputs: ["sites","selectSites","selectedSites","years","selectYears","selectedYears","seasons","selectSeasons","selectedSeasons","ydays","selectYdays","selectedYdays","groupSiteID","showAir","selectedShowAir","showWater","selectedShowWater","showAWLines","selectedShowAWLines","facetDaily","selectedFacetDaily","facetYearly","selectedFacetYearly","aggregators","selectAggregators","selectedAggregators","selectPValue","selectedPValue","selectRSAir","selectedRSAir","selectRSWater","selectedRSWater"], body: (dt,Inputs,markersSelected,Generators,d3) => {
-//import { getInputs } from "/components/inputs.js";//,
-
-const sites = [...new Set(dt.map(d => d.siteID))].sort();
-const selectSites = Inputs.select(sites, {
-  //value: sites,
-  value: markersSelected, 
-  multiple: 8, width: 100, label: "Select sites"});
-const selectedSites = Generators.input(selectSites);
-
-const years = [...new Set(dt.map(d => d.year))].sort();
-const selectYears = (Inputs.select(years, {value: years, multiple: true, width: 80, label: "Select years"}));
-const selectedYears = Generators.input(selectYears);
-
-const seasons = ["Spring", "Summer", "Autumn", "Winter"];//[...new Set(dt.map(d => d.season))];
-const selectSeasons = (Inputs.select(seasons, {value: seasons, multiple: true, width: 80, label: "Select seasons"}));
-const selectedSeasons = Generators.input(selectSeasons);
-
-const ydays = [...new Set(dt.map(d => d.yday))].sort((function(a, b) {
-  return a - b;
-}));
-const selectYdays = (Inputs.select(ydays, {value: d3.range(1,366,60), multiple: true, width: 80, label: "Select day(s) of year"}));
-const selectedYdays = Generators.input(selectYdays);
-
-const groupSiteID = [...new Set(dt.map(d => d.siteID))].sort() // for the colorScale
-
-const showAir = (Inputs.radio([true, false], {label: "Show Air Temp?", value: true}));
-const selectedShowAir = Generators.input(showAir);
-
-const showWater = (Inputs.radio([true, false], {label: "Show Water Temp?", value: true}));
-const selectedShowWater = Generators.input(showWater);
-
-const showAWLines = (Inputs.radio([true, false], {label: "Show lines?", value: true}));
-const selectedShowAWLines = Generators.input(showAWLines);
-
-const facetDaily = (Inputs.radio([true, false], {label: "Graph by day? [not yet implemented]", value: true}));
-const selectedFacetDaily = Generators.input(facetDaily);
-
-const facetYearly = (Inputs.radio([true, false], {label: "Facet by year?", value: false}));
-const selectedFacetYearly = Generators.input(facetYearly);
-
-const aggregators = ["Monthly", "Weekly", "Daily", "15 Minute"];
-const selectAggregators = (Inputs.select(aggregators, {value: "Daily", multiple: false, width: 90, label: "Select aggregation level"}));
-const selectedAggregators = Generators.input(selectAggregators);
-
-const selectPValue = (Inputs.range([0.0001, 1], {value: 1, step: 0.01, width: 220, label: "Select minimum p-value of max(ABC)"}));
-const selectedPValue = Generators.input(selectPValue);
-
-const selectRSAir = (Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, width: 200, label: "Select minimum r-squared for air data fits"}));
-const selectedRSAir = Generators.input(selectRSAir);
-
-const selectRSWater = (Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, width: 200, label: "Select minimum r-squared for water data fits"}));
-const selectedRSWater = Generators.input(selectRSWater);
-
-return {sites,selectSites,selectedSites,years,selectYears,selectedYears,seasons,selectSeasons,selectedSeasons,ydays,selectYdays,selectedYdays,groupSiteID,showAir,selectedShowAir,showWater,selectedShowWater,showAWLines,selectedShowAWLines,facetDaily,selectedFacetDaily,facetYearly,selectedFacetYearly,aggregators,selectAggregators,selectedAggregators,selectPValue,selectedPValue,selectRSAir,selectedRSAir,selectRSWater,selectedRSWater};
-}});
-
-define({id: "01d8bd07", inputs: ["dt","selectedSites","selectedYears","selectedSeasons","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","selectedYdays","dtHOUR_ampPhase","selectedPValue","selectedRSAir","selectedRSWater"], outputs: ["filterBySiteID_year","filterBySiteID_year_season","filterBySiteID_year_yday","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered","dtHOURFiltered","dtHOUR_ampPhase_Filtered"], body: async (dt,selectedSites,selectedYears,selectedSeasons,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,selectedYdays,dtHOUR_ampPhase,selectedPValue,selectedRSAir,selectedRSWater) => {
-const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.a33c85b1.js");
-
-const dtFiltered = filterBySiteID_year_season(dt, selectedSites, selectedYears, selectedSeasons)
-const dtYDAYFiltered = filterBySiteID_year_season(dtYDAY, selectedSites, selectedYears, selectedSeasons)
-const dtYDAY_Week_Filtered = filterBySiteID_year_season(dtYDAY_Week, selectedSites, selectedYears, selectedSeasons)
-const dtYDAY_Month_Filtered = filterBySiteID_year_season(dtYDAY_Month, selectedSites, selectedYears, selectedSeasons)
-
-const dtHOURFiltered = filterBySiteID_year_yday(dtHOUR, selectedSites, selectedYears, selectedYdays)
-
-const dtHOUR_ampPhase_Filtered = filterBySiteID_year_season(dtHOUR_ampPhase, selectedSites, selectedYears, selectedSeasons).filter(
-  d => d.pMaxMax < selectedPValue &&
-  d.rSquared_air > selectedRSAir &&
-  d.rSquared_water > selectedRSWater 
-)
-return {filterBySiteID_year,filterBySiteID_year_season,filterBySiteID_year_yday,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered,dtHOURFiltered,dtHOUR_ampPhase_Filtered};
-}});
-
-define({id: "43825114", inputs: ["display","dtFiltered"], body: (display,dtFiltered) => {
-display(dtFiltered)
-}});
-
 define({id: "7470248a", inline: true, inputs: ["selectAggregators","display"], body: async (selectAggregators,display) => {
 display(await(
 selectAggregators
@@ -368,7 +409,7 @@ showAWLines
 }});
 
 define({id: "f5b68d5d", inputs: ["selectedAggregators","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered"], outputs: ["getAggregatedData","aggregatedData"], body: async (selectedAggregators,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered) => {
-const {getAggregatedData} = await import("./_import/components/variables.a33c85b1.js");
+const {getAggregatedData} = await import("./_import/components/variables.b5a5640d.js");
 const aggregatedData = getAggregatedData(selectedAggregators, dtFiltered, dtYDAYFiltered, dtYDAY_Week_Filtered, dtYDAY_Month_Filtered)
 return {getAggregatedData,aggregatedData};
 }});
@@ -447,16 +488,6 @@ plotPhaseAmp(dtHOUR_ampPhase_Filtered)
 ))
 }});
 
-define({id: "72392026", inputs: ["display","dtHOUR_ampPhase_Filtered"], body: (display,dtHOUR_ampPhase_Filtered) => {
-display(dtHOUR_ampPhase_Filtered)
-}});
-
-define({id: "315d5d2c", inputs: ["Inputs","dtFiltered","display"], body: async (Inputs,dtFiltered,display) => {
-display(await(
-Inputs.table(dtFiltered)
-))
-}});
-
 define({id: "899fa960", inline: true, inputs: ["view","selectYdays"], body: (view,selectYdays) => {
 view(selectYdays)
 }});
@@ -468,6 +499,24 @@ display(dtHOURFiltered)
 define({id: "13f011fc", inputs: ["plotCurve","dtHOURFiltered","display"], body: async (plotCurve,dtHOURFiltered,display) => {
 display(await(
 plotCurve(dtHOURFiltered)
+))
+}});
+
+define({id: "923f3ecb", inputs: ["display","VA_data"], body: (display,VA_data) => {
+display(VA_data)
+}});
+
+define({id: "43825114", inputs: ["display","dtFiltered"], body: (display,dtFiltered) => {
+display(dtFiltered)
+}});
+
+define({id: "72392026", inputs: ["display","dtHOUR_ampPhase_Filtered"], body: (display,dtHOUR_ampPhase_Filtered) => {
+display(dtHOUR_ampPhase_Filtered)
+}});
+
+define({id: "315d5d2c", inputs: ["Inputs","dtFiltered","display"], body: async (Inputs,dtFiltered,display) => {
+display(await(
+Inputs.table(dtFiltered)
 ))
 }});
 
@@ -488,7 +537,6 @@ plotCurve(dtHOURFiltered)
       <ol>
     <li class="observablehq-link observablehq-link-active"><a href="./raw_data">Temperature</a></li>
     <li class="observablehq-link"><a href="./raw_data_flow_temp">Flow and temperature</a></li>
-    <li class="observablehq-link"><a href="./mutable_test">Mutable test</a></li>
       </ol>
     </section>
   </ol>
@@ -499,19 +547,21 @@ plotCurve(dtHOURFiltered)
 <div>Contents</div>
 <ol>
 <li class="observablehq-secondary-link"><a href="#raw-data-summary">Raw data summary</a></li>
+<li class="observablehq-secondary-link"><a href="#filter-the-dataset">Filter the dataset</a></li>
 <li class="observablehq-secondary-link"><a href="#plot-air%2Fwater-temperature">Plot air/water temperature</a></li>
 <li class="observablehq-secondary-link"><a href="#plot-time-series">Plot time series</a></li>
 <li class="observablehq-secondary-link"><a href="#plot-phase-difference-and-amplitude-ratio">Plot phase difference and amplitude ratio</a></li>
 <li class="observablehq-secondary-link"><a href="#plot-hourly-data">Plot hourly data</a></li>
+<li class="observablehq-secondary-link"><a href="#datasets">Datasets</a></li>
 </ol>
 </nav>
 </aside>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
-<div id="cell-16ee02bd" class="observablehq observablehq--block"></div>
-<div id="cell-a6c004ae" class="observablehq observablehq--block"></div>
+<div id="cell-282a7b5b" class="observablehq observablehq--block"></div>
+<div id="cell-ee2a50b8" class="observablehq observablehq--block"></div>
 <p>The dataset for exploration here is from Shenandoah National Park.<br>
-During development of this application, the dataset is limited to just two sites for uploading speed.</p>
+During development of this application, the dataset is limited to just the PA sites for uploading speed.</p>
 <h2 id="raw-data-summary" tabindex="-1"><a class="observablehq-header-anchor" href="#raw-data-summary">Raw data summary</a></h2>
 <div class="grid grid-cols-4">
   <div class="card">
@@ -526,23 +576,43 @@ During development of this application, the dataset is limited to just two sites
     <h2>Number of air temp observations</h2>
     <span class="big"><span id="cell-29505eb2"><span class="observablehq-loading"></span></span></span>
   </div>
-    <div class="card">
+  <div class="card">
     <h2>Number of air temp observations (F)</h2>
     <span class="big"><span id="cell-569c0314"><span class="observablehq-loading"></span></span></span>
   </div>
 </div>
 <hr>
-<div id="cell-923f3ecb" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
-<p>All sites are on the map, but only the "<strong>PA</strong>" sites are included in the data for now.</p>
-<div class="grid grid-cols-1">
-  <div class="card">
+<h2 id="filter-the-dataset" tabindex="-1"><a class="observablehq-header-anchor" href="#filter-the-dataset">Filter the dataset</a></h2>
+<p>Filter by sites, years and seasons. Use either the map or the dropdown to select sites.<br>
+All sites are on the map, but only the "<strong>PA</strong>" sites are included in the data for now.</p>
+<div class="grid grid-cols-4">
+  <div class="card grid-colspan-3">
     <span id="cell-51aeabef"><span class="observablehq-loading"></span></span>
   </div>
+  <div class="grid grid-rows-4">
+    <div class="card grid-colspan-1">
+      <h2>Number of filtered observations</h2>
+      <span class="big"><span id="cell-8d9103ef"><span class="observablehq-loading"></span></span></span>
+    </div>
+    <div class="card grid-colspan-1">
+      <h2>Number of selected sites</h2>
+      <span class="big"><span id="cell-f60bbe75"><span class="observablehq-loading"></span></span></span>
+    </div>
+    <div class="card grid-colspan-1">
+      <h2>Number of selected years</h2>
+      <span class="big"><span id="cell-bc09e940"><span class="observablehq-loading"></span></span></span>
+    </div>
+    <div class="card grid-colspan-1">
+      <h2>Number of selected seasons</h2>
+      <span class="big"><span id="cell-8faaaddf"><span class="observablehq-loading"></span></span></span>
+    </div>
+  </div>
 </div>
-<div id="cell-4d60243e" class="observablehq observablehq--block"></div>
-<div id="cell-a42d7fca" class="observablehq observablehq--block"></div>
-<div id="cell-c60ef53a" class="observablehq observablehq--block"></div>
-<hr>
+<div id="cell-7bc79817" class="observablehq observablehq--block"></div>
+<div id="cell-3741b89f" class="observablehq observablehq--block"></div>
+<div id="cell-f581ce20" class="observablehq observablehq--block"></div>
+<div id="cell-e8aa0ef6" class="observablehq observablehq--block"></div>
+<div id="cell-6360fa26" class="observablehq observablehq--block"></div>
 <div class="grid grid-cols-4">
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
     <span id="cell-3f405064"><span class="observablehq-loading"></span></span>
@@ -556,11 +626,6 @@ During development of this application, the dataset is limited to just two sites
 </div>
 <p><em>color-code map dots by metrics(?). Will metrics need to be standardized across broad region?</em><br>
 <em>add crossfilter for temp raw data and link with map</em></p>
-<div id="cell-c1e0fe10" class="observablehq observablehq--block"></div>
-<div id="cell-01d8bd07" class="observablehq observablehq--block"></div>
-<hr>
-<p>Filtered object:</p>
-<div id="cell-43825114" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
 <hr>
 <h2 id="plot-air%2Fwater-temperature" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-air%2Fwater-temperature">Plot air/water temperature</a></h2>
 <div class="grid grid-cols-4"> 
@@ -582,7 +647,8 @@ During development of this application, the dataset is limited to just two sites
     <span id="cell-ea12d0df"><span class="observablehq-loading"></span></span>
   </div>
 </div>
-<p>Mouse over the time series chart below to see the hourly chart for the selected site, year, and day of year. Water temperature is in blue and air temperature is grey. Predictions are the smooth lines.</p>
+<p>Mouse over the time series chart below to see the hourly chart for the chosen site, year, and day of year.<br>
+In the sub-daily graph, water temperature is in blue and air temperature is grey. Predictions are the smooth lines.</p>
 <div id="cell-bf2ecf7a" class="observablehq observablehq--block"></div>
 <div id="cell-9fdb0f1d" class="observablehq observablehq--block"></div>
 <div id="cell-b2177892" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
@@ -591,8 +657,8 @@ During development of this application, the dataset is limited to just two sites
 <hr>
 <h2 id="plot-phase-difference-and-amplitude-ratio" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-phase-difference-and-amplitude-ratio">Plot phase difference and amplitude ratio</a></h2>
 <p>Filter the graphs for curve fit statistics. Default filter values are set to show all data.<br>
-Use the ABC filter in the first column to filter based on the larger p-value of the 3 ABC paramters for both the <em>air</em> and <em>water</em> temperature models in the sin-cos curve fit for each day. <em>Will probably lose this as r-square may make more sense as a filter</em><br>
-Use the r-square filters in the second column to filter based on r-square values for either the <em>air</em> or <em>water</em> temperature models.</p>
+Use the ABC filter in the first column to filter based on the larger p-value of the 3 ABC paramters for both the <em>air</em> and <em>water</em> temperature models in the sin-cos curve fit for each day. <em>Will probably lose this as r-square may make more sense as a filter</em>.<br>
+Use the r-square filters in the second column to filter based on r-square values for either the <em>air</em> or <em>water</em> temperature models or both.</p>
 <div class="grid grid-cols-3">
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
     <span id="cell-225b9726"><span class="observablehq-loading"></span></span>
@@ -603,11 +669,6 @@ Use the r-square filters in the second column to filter based on r-square values
   </div>
 </div>
 <div id="cell-3adfee82" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
-<div id="cell-72392026" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
-<hr>
-<p>Table of filtered data<br>
-<em>Here for now</em></p>
-<div id="cell-315d5d2c" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
 <hr>
 <h2 id="plot-hourly-data" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-hourly-data">Plot hourly data</a></h2>
 <p>This is likely redundant with the time series clickable graph above.<br>
@@ -619,9 +680,22 @@ Use the r-square filters in the second column to filter based on r-square values
 </div>
 <div id="cell-f725d924" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
 <div id="cell-13f011fc" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<hr>
+<h2 id="datasets" tabindex="-1"><a class="observablehq-header-anchor" href="#datasets">Datasets</a></h2>
+<p>Site data:</p>
+<div id="cell-923f3ecb" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<hr>
+<p>Filtered water/air temp object:</p>
+<div id="cell-43825114" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<hr>
+<p>Filtered phase difference/amplitude ratio object:</p>
+<div id="cell-72392026" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<hr>
+<p>Table of filtered data:</p>
+<div id="cell-315d5d2c" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./"><span>Temperature Raw Data Viewer</span></a><a rel="next" href="./raw_data_flow_temp"><span>Flow and temperature</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-21T17:05:52">May 21, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-22T16:54:03">May 22, 2024</a>.</div>
 </footer>
 </div>

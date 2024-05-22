@@ -14,10 +14,12 @@
 <link rel="modulepreload" href="./_observablehq/stdlib.js">
 <link rel="modulepreload" href="./_import/components/raw_data_flow_temp_plots.536fb703.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/_esm.js">
-<link rel="modulepreload" href="./_import/components/variables.a33c85b1.js">
+<link rel="modulepreload" href="./_import/components/variables.b5a5640d.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.14/_esm.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/duckdb.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/_esm.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.js">
+<link rel="modulepreload" href="./_npm/@duckdb/duckdb-wasm@1.28.0/_esm.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/_esm.js">
 <link rel="modulepreload" href="./_npm/isoformat@0.2.1/_esm.js">
 <link rel="modulepreload" href="./_npm/d3-array@3.2.4/_esm.js">
@@ -50,16 +52,19 @@
 <link rel="modulepreload" href="./_npm/d3-transition@3.0.1/_esm.js">
 <link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/_esm.js">
 <link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/_esm.js">
+<link rel="modulepreload" href="./_npm/apache-arrow@16.1.0/_esm.js">
 <link rel="modulepreload" href="./_npm/internmap@2.0.3/_esm.js">
 <link rel="modulepreload" href="./_npm/delaunator@5.0.1/_esm.js">
 <link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/_esm.js">
+<link rel="modulepreload" href="./_npm/tslib@2.6.2/_esm.js">
+<link rel="modulepreload" href="./_npm/flatbuffers@24.3.25/_esm.js">
 <link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/_esm.js">
 <script type="module">
 
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/VA_site_info.csv", {"name":"./data/VA_site_info.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info.28267165.csv","lastModified":1716319813204});
+registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716384118626});
 registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716323710457});
 registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716323809252});
 registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716324190367});
@@ -75,7 +80,7 @@ return {plotWaterDischarge,d3};
 }});
 
 define({id: "9ee1e068", outputs: ["dt","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR"], body: async () => {
-const {dt, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR} = await import("./_import/components/variables.a33c85b1.js");
+const {dt, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR} = await import("./_import/components/variables.b5a5640d.js");
 
 return {dt,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR};
 }});
@@ -128,7 +133,7 @@ display(aggregatedData)
 }});
 
 define({id: "4bb25ab6", inputs: ["dt","selectedSites","selectedYears","selectedSeasons","dtYDAY","dtYDAY_Week","dtYDAY_Month"], outputs: ["filterBySiteID_year","filterBySiteID_year_season","filterBySiteID_year_yday","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered"], body: async (dt,selectedSites,selectedYears,selectedSeasons,dtYDAY,dtYDAY_Week,dtYDAY_Month) => {
-const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.a33c85b1.js");
+const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.b5a5640d.js");
 
 const dtFiltered = filterBySiteID_year_season(dt, selectedSites, selectedYears, selectedSeasons)
 const dtYDAYFiltered = filterBySiteID_year_season(dtYDAY, selectedSites, selectedYears, selectedSeasons)
@@ -144,7 +149,7 @@ selectAggregators
 }});
 
 define({id: "f5b68d5d", inputs: ["selectedAggregators","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered"], outputs: ["getAggregatedData","aggregatedData"], body: async (selectedAggregators,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered) => {
-const {getAggregatedData} = await import("./_import/components/variables.a33c85b1.js");
+const {getAggregatedData} = await import("./_import/components/variables.b5a5640d.js");
 const aggregatedData = getAggregatedData(selectedAggregators, dtFiltered, dtYDAYFiltered, dtYDAY_Week_Filtered, dtYDAY_Month_Filtered)
 return {getAggregatedData,aggregatedData};
 }});
@@ -172,7 +177,6 @@ plotWaterDischarge(aggregatedData)
       <ol>
     <li class="observablehq-link"><a href="./raw_data">Temperature</a></li>
     <li class="observablehq-link observablehq-link-active"><a href="./raw_data_flow_temp">Flow and temperature</a></li>
-    <li class="observablehq-link"><a href="./mutable_test">Mutable test</a></li>
       </ol>
     </section>
   </ol>
@@ -219,7 +223,7 @@ plotWaterDischarge(aggregatedData)
 <em>for hysterisis, divide temperature by flow, as in <a href="https://doi.org/10.1016/j.scitotenv.2015.11.028" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.scitotenv.2015.11.028</a>. Add option button</em></p>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./raw_data"><span>Temperature</span></a><a rel="next" href="./mutable_test"><span>Mutable test</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-21T17:05:52">May 21, 2024</a>.</div>
+<nav><a rel="prev" href="./raw_data"><span>Temperature</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-22T16:54:03">May 22, 2024</a>.</div>
 </footer>
 </div>
