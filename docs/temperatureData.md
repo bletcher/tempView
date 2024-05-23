@@ -138,6 +138,9 @@ const selectedRSAir = Generators.input(selectRSAir);
 const selectRSWater = (Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, width: 200, label: "Select minimum r-squared for water data fits"}));
 const selectedRSWater = Generators.input(selectRSWater);
 
+const selectAbsMinMax = (Inputs.range([1, 25], {value: 25, step: 0.5, width: 200, label: "Select maximum absolute Phase Difference for plotting"}));
+const selectedAbsMinMax = Generators.input(selectAbsMinMax);
+
 ```
 
 ```js
@@ -157,7 +160,8 @@ const dtHOURFiltered = filterBySiteID_year_yday(dtHOUR, selectedSites, selectedY
 const dtHOUR_ampPhase_Filtered = filterBySiteID_year_season(dtHOUR_ampPhase, selectedSites, selectedYears, selectedSeasons).filter(
   d => d.pMaxMax < selectedPValue &&
   d.rSquared_air > selectedRSAir &&
-  d.rSquared_water > selectedRSWater 
+  d.rSquared_water > selectedRSWater &&
+  Math.abs(d.phaseDiff) < selectedAbsMinMax 
 )
 ```
 
@@ -382,12 +386,14 @@ plotCurveHover(dtHOUR, dtHOUR_params_pred, timeSeriesHover, groupSiteID)
 ## Plot phase difference and amplitude ratio
 
 Filter the graphs for curve fit statistics. Default filter values are set to show all data.  
-Use the ABC filter in the first column to filter based on the larger p-value of the 3 ABC paramters for both the *air* and *water* temperature models in the sin-cos curve fit for each day. *Will probably lose this as r-square may make more sense as a filter*.  
-Use the r-square filters in the second column to filter based on r-square values for either the *air* or *water* temperature models or both.
+Use the `ABC filter` in the first column to filter based on the larger p-value of the 3 ABC paramters for both the *air* and *water* temperature models in the sin-cos curve fit for each day. *Will probably lose this as r-square may make more sense as a filter*.  
+Use the `Select maximum absolute Phase Difference for plotting` filter in the first column to select the maximum absolute value for phase difference for plotting. This is brute force filtering.  
+Use the `r-square` filters in the second column to filter based on r-square values for either the *air* or *water* temperature models or both.
 
 <div class="grid grid-cols-3">
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
     ${selectPValue}
+    ${selectAbsMinMax}
   </div>
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
     ${selectRSAir}

@@ -10,8 +10,8 @@ export default {
      {
        name: "Chapters",
        pages: [
-         {name: "Temperature", path: "/raw_data"},
-         {name: "Flow and temperature", path: "/raw_data_flow_temp"}
+         {name: "Temperature", path: "/temperatureData"},
+         {name: "Flow and temperature", path: "/temperatureFlowData"}
        ]
      }
    ],

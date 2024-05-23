@@ -67,15 +67,15 @@
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716485086760});
-registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716484944070});
-registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716485049715});
-registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716485063496});
-registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.9cb5a404.csv","lastModified":1716485071392});
-registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.177ea851.csv","lastModified":1716484975497});
-registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.0e20b00c.csv","lastModified":1716484992322});
-registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.3b8f1275.csv","lastModified":1716484984061});
-registerFile("./data/samples.parquet", {"name":"./data/samples.parquet","path":"./_file/data/samples.1141f181.parquet","lastModified":1716485087487});
+registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716493258250});
+registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716493139112});
+registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716493242184});
+registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716493246224});
+registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.9cb5a404.csv","lastModified":1716493254478});
+registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.177ea851.csv","lastModified":1716493152257});
+registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.0e20b00c.csv","lastModified":1716493171654});
+registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.3b8f1275.csv","lastModified":1716493162296});
+registerFile("./data/samples.parquet", {"name":"./data/samples.parquet","path":"./_file/data/samples.dfa02fd5.parquet","lastModified":1716493259221});
 
 define({id: "a55e1964", outputs: ["plotTimeSeries","plotAirWater","plotWaterDischarge","plotCurve","plotCurveHover","plotPhaseAmp","d3"], body: async () => {
 const [{plotTimeSeries, plotAirWater, plotWaterDischarge, plotCurve, plotCurveHover, plotPhaseAmp}, d3] = await Promise.all([import("./_import/components/raw_data_plots.5301ada5.js"), import("./_npm/d3@7.9.0/_esm.js")]);
@@ -148,7 +148,7 @@ selectedSeasons.length.toLocaleString("en-US")
 ))
 }});
 
-define({id: "ee85e4cb", inputs: ["dt","Inputs","markersSelected","Generators","d3"], outputs: ["sites","selectSites","selectedSites","years","selectYears","selectedYears","seasons","selectSeasons","selectedSeasons","ydays","selectYdays","selectedYdays","groupSiteID","showAir","selectedShowAir","showWater","selectedShowWater","showAWLines","selectedShowAWLines","facetDaily","selectedFacetDaily","facetYearly","selectedFacetYearly","aggregators","selectAggregators","selectedAggregators","selectPValue","selectedPValue","selectRSAir","selectedRSAir","selectRSWater","selectedRSWater"], body: (dt,Inputs,markersSelected,Generators,d3) => {
+define({id: "37f397cd", inputs: ["dt","Inputs","markersSelected","Generators","d3"], outputs: ["sites","selectSites","selectedSites","years","selectYears","selectedYears","seasons","selectSeasons","selectedSeasons","ydays","selectYdays","selectedYdays","groupSiteID","showAir","selectedShowAir","showWater","selectedShowWater","showAWLines","selectedShowAWLines","facetDaily","selectedFacetDaily","facetYearly","selectedFacetYearly","aggregators","selectAggregators","selectedAggregators","selectPValue","selectedPValue","selectRSAir","selectedRSAir","selectRSWater","selectedRSWater","selectAbsMinMax","selectedAbsMinMax"], body: (dt,Inputs,markersSelected,Generators,d3) => {
 ////////////
 // Inputs //
 ////////////
@@ -206,10 +206,13 @@ const selectedRSAir = Generators.input(selectRSAir);
 const selectRSWater = (Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, width: 200, label: "Select minimum r-squared for water data fits"}));
 const selectedRSWater = Generators.input(selectRSWater);
 
-return {sites,selectSites,selectedSites,years,selectYears,selectedYears,seasons,selectSeasons,selectedSeasons,ydays,selectYdays,selectedYdays,groupSiteID,showAir,selectedShowAir,showWater,selectedShowWater,showAWLines,selectedShowAWLines,facetDaily,selectedFacetDaily,facetYearly,selectedFacetYearly,aggregators,selectAggregators,selectedAggregators,selectPValue,selectedPValue,selectRSAir,selectedRSAir,selectRSWater,selectedRSWater};
+const selectAbsMinMax = (Inputs.range([1, 25], {value: 25, step: 0.5, width: 200, label: "Select maximum absolute Phase Difference for plotting"}));
+const selectedAbsMinMax = Generators.input(selectAbsMinMax);
+
+return {sites,selectSites,selectedSites,years,selectYears,selectedYears,seasons,selectSeasons,selectedSeasons,ydays,selectYdays,selectedYdays,groupSiteID,showAir,selectedShowAir,showWater,selectedShowWater,showAWLines,selectedShowAWLines,facetDaily,selectedFacetDaily,facetYearly,selectedFacetYearly,aggregators,selectAggregators,selectedAggregators,selectPValue,selectedPValue,selectRSAir,selectedRSAir,selectRSWater,selectedRSWater,selectAbsMinMax,selectedAbsMinMax};
 }});
 
-define({id: "3741b89f", inputs: ["dt","selectedSites","selectedYears","selectedSeasons","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","selectedYdays","dtHOUR_ampPhase","selectedPValue","selectedRSAir","selectedRSWater"], outputs: ["filterBySiteID_year","filterBySiteID_year_season","filterBySiteID_year_yday","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered","dtHOURFiltered","dtHOUR_ampPhase_Filtered"], body: async (dt,selectedSites,selectedYears,selectedSeasons,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,selectedYdays,dtHOUR_ampPhase,selectedPValue,selectedRSAir,selectedRSWater) => {
+define({id: "9cd086a7", inputs: ["dt","selectedSites","selectedYears","selectedSeasons","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","selectedYdays","dtHOUR_ampPhase","selectedPValue","selectedRSAir","selectedRSWater","selectedAbsMinMax"], outputs: ["filterBySiteID_year","filterBySiteID_year_season","filterBySiteID_year_yday","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered","dtHOURFiltered","dtHOUR_ampPhase_Filtered"], body: async (dt,selectedSites,selectedYears,selectedSeasons,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,selectedYdays,dtHOUR_ampPhase,selectedPValue,selectedRSAir,selectedRSWater,selectedAbsMinMax) => {
 const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.3a13d9f2.js");
 //////////////////////
 // filtered objects //
@@ -226,7 +229,8 @@ const dtHOURFiltered = filterBySiteID_year_yday(dtHOUR, selectedSites, selectedY
 const dtHOUR_ampPhase_Filtered = filterBySiteID_year_season(dtHOUR_ampPhase, selectedSites, selectedYears, selectedSeasons).filter(
   d => d.pMaxMax < selectedPValue &&
   d.rSquared_air > selectedRSAir &&
-  d.rSquared_water > selectedRSWater 
+  d.rSquared_water > selectedRSWater &&
+  Math.abs(d.phaseDiff) < selectedAbsMinMax 
 )
 return {filterBySiteID_year,filterBySiteID_year_season,filterBySiteID_year_yday,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered,dtHOURFiltered,dtHOUR_ampPhase_Filtered};
 }});
@@ -464,6 +468,12 @@ selectPValue
 ))
 }});
 
+define({id: "59c55df9", inline: true, inputs: ["selectAbsMinMax","display"], body: async (selectAbsMinMax,display) => {
+display(await(
+selectAbsMinMax
+))
+}});
+
 define({id: "54e2ae3a", inline: true, inputs: ["selectRSAir","display"], body: async (selectRSAir,display) => {
 display(await(
 selectRSAir
@@ -602,8 +612,8 @@ const parquetData = Parquet.writeParquet(parquetTable, parquetBuilder);
     <section class="observablehq-section-active">
       <summary>Chapters</summary>
       <ol>
-    <li class="observablehq-link observablehq-link-active"><a href="./raw_data">Temperature</a></li>
-    <li class="observablehq-link"><a href="./raw_data_flow_temp">Flow and temperature</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./temperatureData">Temperature</a></li>
+    <li class="observablehq-link"><a href="./temperatureFlowData">Flow and temperature</a></li>
       </ol>
     </section>
   </ol>
@@ -674,8 +684,8 @@ All sites are on the map, but only these sites ["PA_01FL", "PA_02FL", "PA_03FL",
     </div>
   </div>
 </div>
-<div id="cell-ee85e4cb" class="observablehq observablehq--block"></div>
-<div id="cell-3741b89f" class="observablehq observablehq--block"></div>
+<div id="cell-37f397cd" class="observablehq observablehq--block"></div>
+<div id="cell-9cd086a7" class="observablehq observablehq--block"></div>
 <div id="cell-f581ce20" class="observablehq observablehq--block"></div>
 <div id="cell-7ada9bbc" class="observablehq observablehq--block"></div>
 <div id="cell-6360fa26" class="observablehq observablehq--block"></div>
@@ -723,11 +733,13 @@ In the sub-daily graph, water temperature is in site-specific color and air temp
 <hr>
 <h2 id="plot-phase-difference-and-amplitude-ratio" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-phase-difference-and-amplitude-ratio">Plot phase difference and amplitude ratio</a></h2>
 <p>Filter the graphs for curve fit statistics. Default filter values are set to show all data.<br>
-Use the ABC filter in the first column to filter based on the larger p-value of the 3 ABC paramters for both the <em>air</em> and <em>water</em> temperature models in the sin-cos curve fit for each day. <em>Will probably lose this as r-square may make more sense as a filter</em>.<br>
-Use the r-square filters in the second column to filter based on r-square values for either the <em>air</em> or <em>water</em> temperature models or both.</p>
+Use the <code>ABC filter</code> in the first column to filter based on the larger p-value of the 3 ABC paramters for both the <em>air</em> and <em>water</em> temperature models in the sin-cos curve fit for each day. <em>Will probably lose this as r-square may make more sense as a filter</em>.<br>
+Use the <code>Select maximum absolute Phase Difference for plotting</code> filter in the first column to select the maximum absolute value for phase difference for plotting. This is brute force filtering.<br>
+Use the <code>r-square</code> filters in the second column to filter based on r-square values for either the <em>air</em> or <em>water</em> temperature models or both.</p>
 <div class="grid grid-cols-3">
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
     <span id="cell-225b9726"><span class="observablehq-loading"></span></span>
+    <span id="cell-59c55df9"><span class="observablehq-loading"></span></span>
   </div>
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
     <span id="cell-54e2ae3a"><span class="observablehq-loading"></span></span>
@@ -766,7 +778,7 @@ Use the r-square filters in the second column to filter based on r-square values
 <div id="cell-c16cdcec" class="observablehq observablehq--block"></div>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./"><span>Temperature Raw Data Viewer</span></a><a rel="next" href="./raw_data_flow_temp"><span>Flow and temperature</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-23T15:16:01">May 23, 2024</a>.</div>
+<nav><a rel="prev" href="./"><span>Temperature Raw Data Viewer</span></a><a rel="next" href="./temperatureFlowData"><span>Flow and temperature</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-23T15:57:24">May 23, 2024</a>.</div>
 </footer>
 </div>
