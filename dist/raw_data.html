@@ -14,15 +14,16 @@
 <link rel="modulepreload" href="./_observablehq/client.js">
 <link rel="modulepreload" href="./_observablehq/runtime.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.js">
-<link rel="modulepreload" href="./_import/components/raw_data_plots.73e3d57d.js">
+<link rel="modulepreload" href="./_import/components/raw_data_plots.5301ada5.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/_esm.js">
-<link rel="modulepreload" href="./_observablehq/stdlib/duckdb.js">
-<link rel="modulepreload" href="./_import/components/variables.b5a5640d.js">
+<link rel="modulepreload" href="./_import/components/variables.3a13d9f2.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.14/_esm.js">
+<link rel="modulepreload" href="./_node/regression@2.0.1/index.js">
 <link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/_esm.js">
+<link rel="modulepreload" href="./_npm/apache-arrow@16.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/parquet-wasm@0.6.1/_esm.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.js">
 <link rel="modulepreload" href="./_npm/leaflet@1.9.4/_esm.js">
-<link rel="modulepreload" href="./_npm/@duckdb/duckdb-wasm@1.28.0/_esm.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/_esm.js">
 <link rel="modulepreload" href="./_npm/isoformat@0.2.1/_esm.js">
 <link rel="modulepreload" href="./_npm/d3-array@3.2.4/_esm.js">
@@ -55,42 +56,48 @@
 <link rel="modulepreload" href="./_npm/d3-transition@3.0.1/_esm.js">
 <link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/_esm.js">
 <link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/_esm.js">
-<link rel="modulepreload" href="./_npm/apache-arrow@16.1.0/_esm.js">
+<link rel="modulepreload" href="./_npm/tslib@2.6.2/_esm.js">
+<link rel="modulepreload" href="./_npm/flatbuffers@24.3.25/_esm.js">
 <link rel="modulepreload" href="./_npm/internmap@2.0.3/_esm.js">
 <link rel="modulepreload" href="./_npm/delaunator@5.0.1/_esm.js">
 <link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/_esm.js">
-<link rel="modulepreload" href="./_npm/tslib@2.6.2/_esm.js">
-<link rel="modulepreload" href="./_npm/flatbuffers@24.3.25/_esm.js">
 <link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/_esm.js">
 <script type="module">
 
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716412099200});
-registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716412002637});
-registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716412085403});
-registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716412088561});
-registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.9cb5a404.csv","lastModified":1716412095769});
-registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.177ea851.csv","lastModified":1716412014520});
-registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.0e20b00c.csv","lastModified":1716412030826});
-registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.3b8f1275.csv","lastModified":1716412022627});
+registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716485086760});
+registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716484944070});
+registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716485049715});
+registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716485063496});
+registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.9cb5a404.csv","lastModified":1716485071392});
+registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.177ea851.csv","lastModified":1716484975497});
+registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.0e20b00c.csv","lastModified":1716484992322});
+registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.3b8f1275.csv","lastModified":1716484984061});
+registerFile("./data/samples.parquet", {"name":"./data/samples.parquet","path":"./_file/data/samples.1141f181.parquet","lastModified":1716485087487});
 
-define({id: "282a7b5b", outputs: ["plotTimeSeries","plotAirWater","plotWaterDischarge","plotCurve","plotCurveHover","plotPhaseAmp","d3","DuckDBClient"], body: async () => {
-const [{plotTimeSeries, plotAirWater, plotWaterDischarge, plotCurve, plotCurveHover, plotPhaseAmp}, d3, {DuckDBClient}] = await Promise.all([import("./_import/components/raw_data_plots.73e3d57d.js"), import("./_npm/d3@7.9.0/_esm.js"), import("./_observablehq/stdlib/duckdb.js")]);
+define({id: "a55e1964", outputs: ["plotTimeSeries","plotAirWater","plotWaterDischarge","plotCurve","plotCurveHover","plotPhaseAmp","d3"], body: async () => {
+const [{plotTimeSeries, plotAirWater, plotWaterDischarge, plotCurve, plotCurveHover, plotPhaseAmp}, d3] = await Promise.all([import("./_import/components/raw_data_plots.5301ada5.js"), import("./_npm/d3@7.9.0/_esm.js")]);
 //import {addMap} from "./components/raw_data_map.js";
 //import {interval} from 'https://observablehq.com/@mootari/range-slider';
+//import { ML } from 'ml';
 //import {Mutable} from "@observablehq/stdlib";
 //import * as tidyjs from "npm:tidyjs";
-
-return {plotTimeSeries,plotAirWater,plotWaterDischarge,plotCurve,plotCurveHover,plotPhaseAmp,d3,DuckDBClient};
+//import {DuckDBClient} from "npm:@observablehq/duckdb";
+return {plotTimeSeries,plotAirWater,plotWaterDischarge,plotCurve,plotCurveHover,plotPhaseAmp,d3};
 }});
 
-define({id: "ee2a50b8", outputs: ["dt","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","dtHOUR_ampPhase","dtHOUR_params_pred","VA_data"], body: async () => {
-const [{dt, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR, dtHOUR_ampPhase, dtHOUR_params_pred}, {VA_data}] = await Promise.all([import("./_import/components/variables.b5a5640d.js"), import("./_import/components/variables.b5a5640d.js")]);
+define({id: "3043aa77", outputs: ["dt","samples","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","dtHOUR_ampPhase","dtHOUR_params_pred","VA_data"], body: async () => {
+const [{dt, samples, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR, dtHOUR_ampPhase, dtHOUR_params_pred}, {VA_data}] = await Promise.all([import("./_import/components/variables.3a13d9f2.js"), import("./_import/components/variables.3a13d9f2.js")]);
 
 
-return {dt,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,dtHOUR_ampPhase,dtHOUR_params_pred,VA_data};
+return {dt,samples,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,dtHOUR_ampPhase,dtHOUR_params_pred,VA_data};
+}});
+
+define({id: "9a812880", inputs: ["dt"], outputs: ["intialSite"], body: (dt) => {
+const intialSite = [...new Set(dt.map(d => d.siteID))].sort()[0];//"PA_01FL";
+return {intialSite};
 }});
 
 define({id: "d44a9786", inline: true, inputs: ["dt","display"], body: async (dt,display) => {
@@ -108,12 +115,6 @@ dt.filter(d => d.waterTemperature).length.toLocaleString("en-US")
 define({id: "29505eb2", inline: true, inputs: ["dt","display"], body: async (dt,display) => {
 display(await(
 dt.filter(d => d.airTemperature).length.toLocaleString("en-US")
-))
-}});
-
-define({id: "569c0314", inline: true, inputs: ["dt","display"], body: async (dt,display) => {
-display(await(
-dt.filter(d => d.AirTemperature_HOBO_degF).length.toLocaleString("en-US")
 ))
 }});
 
@@ -147,7 +148,7 @@ selectedSeasons.length.toLocaleString("en-US")
 ))
 }});
 
-define({id: "7bc79817", inputs: ["dt","Inputs","markersSelected","Generators","d3"], outputs: ["sites","selectSites","selectedSites","years","selectYears","selectedYears","seasons","selectSeasons","selectedSeasons","ydays","selectYdays","selectedYdays","groupSiteID","showAir","selectedShowAir","showWater","selectedShowWater","showAWLines","selectedShowAWLines","facetDaily","selectedFacetDaily","facetYearly","selectedFacetYearly","aggregators","selectAggregators","selectedAggregators","selectPValue","selectedPValue","selectRSAir","selectedRSAir","selectRSWater","selectedRSWater"], body: (dt,Inputs,markersSelected,Generators,d3) => {
+define({id: "ee85e4cb", inputs: ["dt","Inputs","markersSelected","Generators","d3"], outputs: ["sites","selectSites","selectedSites","years","selectYears","selectedYears","seasons","selectSeasons","selectedSeasons","ydays","selectYdays","selectedYdays","groupSiteID","showAir","selectedShowAir","showWater","selectedShowWater","showAWLines","selectedShowAWLines","facetDaily","selectedFacetDaily","facetYearly","selectedFacetYearly","aggregators","selectAggregators","selectedAggregators","selectPValue","selectedPValue","selectRSAir","selectedRSAir","selectRSWater","selectedRSWater"], body: (dt,Inputs,markersSelected,Generators,d3) => {
 ////////////
 // Inputs //
 ////////////
@@ -156,7 +157,7 @@ define({id: "7bc79817", inputs: ["dt","Inputs","markersSelected","Generators","d
 
 const sites = [...new Set(dt.map(d => d.siteID))].sort();
 const selectSites = Inputs.select(sites, {
-  //value: sites,
+  //value: sites[0],
   value: markersSelected, 
   multiple: 8, width: 100, label: "Select sites"});
 const selectedSites = Generators.input(selectSites);
@@ -209,7 +210,7 @@ return {sites,selectSites,selectedSites,years,selectYears,selectedYears,seasons,
 }});
 
 define({id: "3741b89f", inputs: ["dt","selectedSites","selectedYears","selectedSeasons","dtYDAY","dtYDAY_Week","dtYDAY_Month","dtHOUR","selectedYdays","dtHOUR_ampPhase","selectedPValue","selectedRSAir","selectedRSWater"], outputs: ["filterBySiteID_year","filterBySiteID_year_season","filterBySiteID_year_yday","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered","dtHOURFiltered","dtHOUR_ampPhase_Filtered"], body: async (dt,selectedSites,selectedYears,selectedSeasons,dtYDAY,dtYDAY_Week,dtYDAY_Month,dtHOUR,selectedYdays,dtHOUR_ampPhase,selectedPValue,selectedRSAir,selectedRSWater) => {
-const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.b5a5640d.js");
+const {filterBySiteID_year, filterBySiteID_year_season, filterBySiteID_year_yday} = await import("./_import/components/variables.3a13d9f2.js");
 //////////////////////
 // filtered objects //
 //////////////////////
@@ -295,7 +296,7 @@ define({id: "f581ce20", inputs: ["display","L"], outputs: ["lat1","lon1","mag1",
 return {lat1,lon1,mag1,div_map1,map1,basemaps1,initialView1};
 }});
 
-define({id: "e8aa0ef6", inputs: ["L","map1","VA_data","Mutable"], outputs: ["addMarkers","addClickListenersToMarkers","updateMarkerStyles","markers","markersSelected"], body: (L,map1,VA_data,Mutable) => {
+define({id: "7ada9bbc", inputs: ["L","map1","VA_data","Mutable","intialSite"], outputs: ["addMarkers","addClickListenersToMarkers","updateMarkerStyles","markers","markersSelected"], body: (L,map1,VA_data,Mutable,intialSite) => {
 /////////////////////////////////
 // Add map markers and updates //
 /////////////////////////////////
@@ -352,7 +353,7 @@ function updateMarkerStyles(markers) {
 
 let markers = addMarkers(VA_data);
 addClickListenersToMarkers(markers);
-let markersSelected = Mutable([]);
+let markersSelected = Mutable([intialSite]);
 return {addMarkers,addClickListenersToMarkers,updateMarkerStyles,markers,markersSelected};
 }});
 
@@ -409,7 +410,7 @@ showAWLines
 }});
 
 define({id: "f5b68d5d", inputs: ["selectedAggregators","dtFiltered","dtYDAYFiltered","dtYDAY_Week_Filtered","dtYDAY_Month_Filtered"], outputs: ["getAggregatedData","aggregatedData"], body: async (selectedAggregators,dtFiltered,dtYDAYFiltered,dtYDAY_Week_Filtered,dtYDAY_Month_Filtered) => {
-const {getAggregatedData} = await import("./_import/components/variables.b5a5640d.js");
+const {getAggregatedData} = await import("./_import/components/variables.3a13d9f2.js");
 const aggregatedData = getAggregatedData(selectedAggregators, dtFiltered, dtYDAYFiltered, dtYDAY_Week_Filtered, dtYDAY_Month_Filtered)
 return {getAggregatedData,aggregatedData};
 }});
@@ -418,6 +419,10 @@ define({id: "69a92002", inputs: ["plotAirWater","aggregatedData","selectedShowAW
 display(await(
 plotAirWater(aggregatedData, selectedShowAWLines)
 ))
+}});
+
+define({id: "01ba4719", body: () => {
+
 }});
 
 define({id: "d128e9cf", inline: true, inputs: ["showWater","display"], body: async (showWater,display) => {
@@ -443,24 +448,13 @@ const timeSeriesHover = view(plotTimeSeries(dtFiltered, groupSiteID, selectedSho
 return {timeSeriesHover};
 }});
 
-define({id: "9fdb0f1d", body: () => {
-/*
-//let clickedData = [];
-let selection = d3.selectAll(timeSeriesHover).selectAll('.line') 
-  .on('click', function(event, d) {
-    // 'd' is the data bound to the clicked element
-    console.log(d);  // Log the data to the console
-  });
-*/
+define({id: "d796e1e7", body: () => {
+//display(timeSeriesHover)
 }});
 
-define({id: "b2177892", inputs: ["display","timeSeriesHover"], body: (display,timeSeriesHover) => {
-display(timeSeriesHover)
-}});
-
-define({id: "f6c673b2", inputs: ["plotCurveHover","dtHOUR","dtHOUR_params_pred","timeSeriesHover","display"], body: async (plotCurveHover,dtHOUR,dtHOUR_params_pred,timeSeriesHover,display) => {
+define({id: "dd65b1c4", inputs: ["plotCurveHover","dtHOUR","dtHOUR_params_pred","timeSeriesHover","groupSiteID","display"], body: async (plotCurveHover,dtHOUR,dtHOUR_params_pred,timeSeriesHover,groupSiteID,display) => {
 display(await(
-plotCurveHover(dtHOUR, dtHOUR_params_pred, timeSeriesHover)
+plotCurveHover(dtHOUR, dtHOUR_params_pred, timeSeriesHover, groupSiteID)
 ))
 }});
 
@@ -520,6 +514,79 @@ Inputs.table(dtFiltered)
 ))
 }});
 
+define({id: "ca866eea", inputs: ["display"], outputs: ["date","value","start","end"], body: (display) => {
+/*
+Inputs.table(samples, {
+  format: {
+    date: (x) => new Date(x).toISOString().slice(0, 10)
+  }
+})
+*/
+const date = [];
+const value = [];
+const start = new Date("2022-01-01");
+const end = new Date("2023-01-01");
+for (let currentValue = 0, currentDate = start; currentDate < end; ) {
+  date.push(currentDate);
+  value.push(currentValue);
+  (currentDate = new Date(currentDate)), currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  currentValue += Math.random() - 0.5;
+}
+display({date, value})
+return {date,value,start,end};
+}});
+
+define({id: "3cae6d4d", body: () => {
+//display(data)
+
+}});
+
+define({id: "c16cdcec", body: () => {
+/*
+
+//import * as Arrow from "apache-arrow";
+import { Table, Schema, Field, Float32 } from "apache-arrow";
+
+import * as Parquet from "parquet-wasm";
+// Convert the JSON object to an array of objects if it's not already one
+//const data = Array.isArray(dt) ? dt : [dt];
+
+//const table = Arrow.Table.from(data);
+
+// Generate a daily random walk as parallel arrays of {date, value}.
+
+const data = {
+  //siteID: dt.map(d => d.siteID),
+  //dateTime: dt.map(d => d.dateTime),
+  waterTemperature: dt.map(d => d.waterTemperature)
+}
+
+// Define the schema
+const schema0 = new Arrow.Schema({
+  fields: [
+    //Arrow.Field.new({ name: 'siteID', type: new Arrow.Int32() }),
+    //Arrow.Field.new({ name: 'dateTime', type: new Arrow.TimestampMillisecond() }),
+    Arrow.Field.new({ name: 'waterTemperature', type: new Arrow.Float32() })
+  ]
+});
+
+const schema = new Schema([
+  //new Field('siteID', new Int32()),
+  //new Field('dateTime', new TimestampMillisecond()),
+  new Field('waterTemperature', new Float32())
+]);
+
+const table = Table.from([schema, data]);
+
+// Output the Apache Arrow table as a Parquet table to standard out.
+const parquetTable = Parquet.Table.fromIPCStream(Arrow.tableToIPC(table, "stream"));
+const parquetBuilder = new Parquet.WriterPropertiesBuilder().setCompression(Parquet.Compression.ZSTD).build();
+const parquetData = Parquet.writeParquet(parquetTable, parquetBuilder);
+
+
+*/
+}});
+
 </script>
 <input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
 <label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
@@ -558,10 +625,12 @@ Inputs.table(dtFiltered)
 </aside>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
-<div id="cell-282a7b5b" class="observablehq observablehq--block"></div>
-<div id="cell-ee2a50b8" class="observablehq observablehq--block"></div>
+<div id="cell-a55e1964" class="observablehq observablehq--block"></div>
+<div id="cell-3043aa77" class="observablehq observablehq--block"></div>
+<div id="cell-9a812880" class="observablehq observablehq--block"></div>
 <p>The dataset for exploration here is from Shenandoah National Park.<br>
-During development of this application, the dataset is limited to just the PA sites for uploading speed.</p>
+During development of this application, the dataset is limited to just these  "PA_01FL", "PA_02FL", "PA_03FL", "PA_04FL" sites to deal with large file sizes with the whole dataset.<br>
+Eventually, we will likely store the data in <strong>parquet files</strong> and use <strong>duckDB</strong> which can drastically limit file sizes and run times.</p>
 <h2 id="raw-data-summary" tabindex="-1"><a class="observablehq-header-anchor" href="#raw-data-summary">Raw data summary</a></h2>
 <div class="grid grid-cols-4">
   <div class="card">
@@ -576,15 +645,12 @@ During development of this application, the dataset is limited to just the PA si
     <h2>Number of air temp observations</h2>
     <span class="big"><span id="cell-29505eb2"><span class="observablehq-loading"></span></span></span>
   </div>
-  <div class="card">
-    <h2>Number of air temp observations (F)</h2>
-    <span class="big"><span id="cell-569c0314"><span class="observablehq-loading"></span></span></span>
-  </div>
 </div>
 <hr>
 <h2 id="filter-the-dataset" tabindex="-1"><a class="observablehq-header-anchor" href="#filter-the-dataset">Filter the dataset</a></h2>
 <p>Filter by sites, years and seasons. Use either the map or the dropdown to select sites.<br>
-All sites are on the map, but only the "<strong>PA</strong>" sites are included in the data for now.</p>
+Click on a site marker to select or unselect a site. Selected sites will be <span style="color:#eb8117;"><em>orange</em></span>.<br>
+All sites are on the map, but only these sites ["PA_01FL", "PA_02FL", "PA_03FL", "PA_04FL"] are included in the data for now.</p>
 <div class="grid grid-cols-4">
   <div class="card grid-colspan-3">
     <span id="cell-51aeabef"><span class="observablehq-loading"></span></span>
@@ -608,10 +674,10 @@ All sites are on the map, but only the "<strong>PA</strong>" sites are included 
     </div>
   </div>
 </div>
-<div id="cell-7bc79817" class="observablehq observablehq--block"></div>
+<div id="cell-ee85e4cb" class="observablehq observablehq--block"></div>
 <div id="cell-3741b89f" class="observablehq observablehq--block"></div>
 <div id="cell-f581ce20" class="observablehq observablehq--block"></div>
-<div id="cell-e8aa0ef6" class="observablehq observablehq--block"></div>
+<div id="cell-7ada9bbc" class="observablehq observablehq--block"></div>
 <div id="cell-6360fa26" class="observablehq observablehq--block"></div>
 <div class="grid grid-cols-4">
   <div style="display: flex; flex-direction: column; align-items: flex-start;">
@@ -624,8 +690,8 @@ All sites are on the map, but only the "<strong>PA</strong>" sites are included 
     <span id="cell-5d5bdc22"><span class="observablehq-loading"></span></span>
   </div>
 </div>
-<p><em>color-code map dots by metrics(?). Will metrics need to be standardized across broad region?</em><br>
-<em>add crossfilter for temp raw data and link with map</em></p>
+<p><em>Color-code map dots by phaseDiff and amplitudeRatio metrics(?). Will metrics need to be standardized across broad region?</em><br>
+<em>Could add crossfilter for temp raw data and link with map to show sites that meet temperature criteria - this may be a different enough function that it goes in a separate page.</em></p>
 <hr>
 <h2 id="plot-air%2Fwater-temperature" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-air%2Fwater-temperature">Plot air/water temperature</a></h2>
 <div class="grid grid-cols-4"> 
@@ -638,6 +704,7 @@ All sites are on the map, but only the "<strong>PA</strong>" sites are included 
 </div>
 <div id="cell-f5b68d5d" class="observablehq observablehq--block"></div>
 <div id="cell-69a92002" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<div id="cell-01ba4719" class="observablehq observablehq--block"></div>
 <hr>
 <h2 id="plot-time-series" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-time-series">Plot time series</a></h2>
 <div class="grid grid-cols-2"> 
@@ -648,12 +715,11 @@ All sites are on the map, but only the "<strong>PA</strong>" sites are included 
   </div>
 </div>
 <p>Mouse over the time series chart below to see the hourly chart for the chosen site, year, and day of year.<br>
-In the sub-daily graph, water temperature is in blue and air temperature is grey. Predictions are the smooth lines.</p>
+In the sub-daily graph, water temperature is in site-specific color and air temperature is grey. Predictions are the smooth lines.</p>
 <div id="cell-bf2ecf7a" class="observablehq observablehq--block"></div>
-<div id="cell-9fdb0f1d" class="observablehq observablehq--block"></div>
-<div id="cell-b2177892" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
-<div id="cell-f6c673b2" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
-<p><em>Add capability to add days to the graph by clicking</em></p>
+<div id="cell-d796e1e7" class="observablehq observablehq--block"></div>
+<div id="cell-dd65b1c4" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<p><em>Could add capability to add days to the graph by clicking, but the graph would get confusing quickly. See <a href="./raw_data#plot-hourly-data">Plot Hourly Data</a> section for an alternative.</em></p>
 <hr>
 <h2 id="plot-phase-difference-and-amplitude-ratio" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-phase-difference-and-amplitude-ratio">Plot phase difference and amplitude ratio</a></h2>
 <p>Filter the graphs for curve fit statistics. Default filter values are set to show all data.<br>
@@ -680,6 +746,7 @@ Use the r-square filters in the second column to filter based on r-square values
 </div>
 <div id="cell-f725d924" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
 <div id="cell-13f011fc" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<p><em>Could standardize air and water temperature so we can see variation in the water temperature and how it lines up or not with the air temperature</em></p>
 <hr>
 <h2 id="datasets" tabindex="-1"><a class="observablehq-header-anchor" href="#datasets">Datasets</a></h2>
 <p>Site data:</p>
@@ -693,9 +760,13 @@ Use the r-square filters in the second column to filter based on r-square values
 <hr>
 <p>Table of filtered data:</p>
 <div id="cell-315d5d2c" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<p>Parquet playground - ignore</p>
+<div id="cell-ca866eea" class="observablehq observablehq--block"></div>
+<div id="cell-3cae6d4d" class="observablehq observablehq--block"></div>
+<div id="cell-c16cdcec" class="observablehq observablehq--block"></div>
 </main>
 <footer id="observablehq-footer">
 <nav><a rel="prev" href="./"><span>Temperature Raw Data Viewer</span></a><a rel="next" href="./raw_data_flow_temp"><span>Flow and temperature</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-22T17:06:18">May 22, 2024</a>.</div>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-23T15:16:01">May 23, 2024</a>.</div>
 </footer>
 </div>

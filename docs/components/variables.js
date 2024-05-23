@@ -1,5 +1,5 @@
 import {FileAttachment} from "npm:@observablehq/stdlib";
-import {DuckDBClient} from "npm:@observablehq/duckdb";
+//import {DuckDBClient} from "npm:@observablehq/duckdb";
 //import * as d3 from "npm:d3";
 
 export const dt = await FileAttachment("../data/dt.csv").csv({typed: true});
@@ -12,7 +12,8 @@ export const dtHOUR_params_pred = await FileAttachment("../data/dtHOUR_params_pr
 
 export const VA_data = await FileAttachment("../data/VA_site_info_DL.csv").csv({typed: true});
 
-//export const dtPQ = FileAttachment("../data/samples.parquet").parquet();
+export const samples = FileAttachment("../data/samples.parquet").parquet();
+//export const dtPQ = FileAttachment("../data/dtPQ.parquet").parquet();
 
 export function filterBySiteID_year_season(d, selectedSites, selectedYears, selectedSeasons) {
   return d.filter(d => 

@@ -8,19 +8,25 @@ import {plotTimeSeries, plotAirWater, plotWaterDischarge, plotCurve, plotCurveHo
 //import {addMap} from "./components/raw_data_map.js";
 //import {interval} from 'https://observablehq.com/@mootari/range-slider';
 import * as d3 from "npm:d3";
+//import { ML } from 'ml';
 //import {Mutable} from "@observablehq/stdlib";
 //import * as tidyjs from "npm:tidyjs";
-import {DuckDBClient} from "npm:@observablehq/duckdb";
+//import {DuckDBClient} from "npm:@observablehq/duckdb";
 ```
 
 ```js
-import {dt,  dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR, dtHOUR_ampPhase, dtHOUR_params_pred} from "./components/variables.js";
+import {dt, samples, dtYDAY, dtYDAY_Week, dtYDAY_Month, dtHOUR, dtHOUR_ampPhase, dtHOUR_params_pred} from "./components/variables.js";
 
 import {VA_data} from "./components/variables.js";
 ```
 
+```js
+const intialSite = [...new Set(dt.map(d => d.siteID))].sort()[0];//"PA_01FL";
+```
+
 The dataset for exploration here is from Shenandoah National Park.  
-During development of this application, the dataset is limited to just the PA sites for uploading speed.
+During development of this application, the dataset is limited to just these  "PA_01FL", "PA_02FL", "PA_03FL", "PA_04FL" sites to deal with large file sizes with the whole dataset.  
+Eventually, we will likely store the data in **parquet files** and use **duckDB** which can drastically limit file sizes and run times.
 
 ## Raw data summary
 
@@ -37,10 +43,6 @@ During development of this application, the dataset is limited to just the PA si
     <h2>Number of air temp observations</h2>
     <span class="big">${dt.filter(d => d.airTemperature).length.toLocaleString("en-US")}</span>
   </div>
-  <div class="card">
-    <h2>Number of air temp observations (F)</h2>
-    <span class="big">${dt.filter(d => d.AirTemperature_HOBO_degF).length.toLocaleString("en-US")}</span>
-  </div>
 </div>
 
 ---
@@ -48,7 +50,8 @@ During development of this application, the dataset is limited to just the PA si
 ## Filter the dataset
 
 Filter by sites, years and seasons. Use either the map or the dropdown to select sites.  
-All sites are on the map, but only the "**PA**" sites are included in the data for now.
+Click on a site marker to select or unselect a site. Selected sites will be <span style="color:#eb8117;">*orange*</span>.  
+All sites are on the map, but only these sites ["PA_01FL", "PA_02FL", "PA_03FL", "PA_04FL"] are included in the data for now.
 
 <div class="grid grid-cols-4">
 
@@ -86,7 +89,7 @@ All sites are on the map, but only the "**PA**" sites are included in the data f
 
 const sites = [...new Set(dt.map(d => d.siteID))].sort();
 const selectSites = Inputs.select(sites, {
-  //value: sites,
+  //value: sites[0],
   value: markersSelected, 
   multiple: 8, width: 100, label: "Select sites"});
 const selectedSites = Generators.input(selectSites);
@@ -279,7 +282,7 @@ function updateMarkerStyles(markers) {
 
 let markers = addMarkers(VA_data);
 addClickListenersToMarkers(markers);
-let markersSelected = Mutable([]);
+let markersSelected = Mutable([intialSite]);
 ```
 
 ```js
@@ -316,8 +319,8 @@ selectSites.addEventListener('change', function() {
   </div>
 </div>
 
-*color-code map dots by metrics(?). Will metrics need to be standardized across broad region?*  
-*add crossfilter for temp raw data and link with map*
+*Color-code map dots by phaseDiff and amplitudeRatio metrics(?). Will metrics need to be standardized across broad region?*  
+*Could add crossfilter for temp raw data and link with map to show sites that meet temperature criteria - this may be a different enough function that it goes in a separate page.*
 
 ---
 
@@ -341,6 +344,10 @@ const aggregatedData = getAggregatedData(selectedAggregators, dtFiltered, dtYDAY
 plotAirWater(aggregatedData, selectedShowAWLines)
 ```
 
+```js
+
+```
+
 ---
 
 ## Plot time series
@@ -354,32 +361,21 @@ plotAirWater(aggregatedData, selectedShowAWLines)
 </div>
 
 Mouse over the time series chart below to see the hourly chart for the chosen site, year, and day of year.  
-In the sub-daily graph, water temperature is in blue and air temperature is grey. Predictions are the smooth lines.
+In the sub-daily graph, water temperature is in site-specific color and air temperature is grey. Predictions are the smooth lines.
 
 ```js
 const timeSeriesHover = view(plotTimeSeries(dtFiltered, groupSiteID, selectedShowWater, selectedShowAir, selectedFacetYearly));
 ```
 
 ```js
-/*
-//let clickedData = [];
-let selection = d3.selectAll(timeSeriesHover).selectAll('.line') 
-  .on('click', function(event, d) {
-    // 'd' is the data bound to the clicked element
-    console.log(d);  // Log the data to the console
-  });
-*/
+//display(timeSeriesHover)
 ```
 
 ```js
-display(timeSeriesHover)
+plotCurveHover(dtHOUR, dtHOUR_params_pred, timeSeriesHover, groupSiteID)
 ```
 
-```js
-plotCurveHover(dtHOUR, dtHOUR_params_pred, timeSeriesHover)
-```
-
-*Add capability to add days to the graph by clicking*
+*Could add capability to add days to the graph by clicking, but the graph would get confusing quickly. See [Plot Hourly Data](./raw_data#plot-hourly-data) section for an alternative.*
 
 ---
 
@@ -424,6 +420,8 @@ display(dtHOURFiltered)
 plotCurve(dtHOURFiltered)
 ```
 
+*Could standardize air and water temperature so we can see variation in the water temperature and how it lines up or not with the air temperature*
+
 ---
 
 ## Datasets
@@ -455,4 +453,78 @@ Table of filtered data:
 
 ```js
 Inputs.table(dtFiltered)
+```
+
+Parquet playground - ignore
+
+```js
+/*
+Inputs.table(samples, {
+  format: {
+    date: (x) => new Date(x).toISOString().slice(0, 10)
+  }
+})
+*/
+const date = [];
+const value = [];
+const start = new Date("2022-01-01");
+const end = new Date("2023-01-01");
+for (let currentValue = 0, currentDate = start; currentDate < end; ) {
+  date.push(currentDate);
+  value.push(currentValue);
+  (currentDate = new Date(currentDate)), currentDate.setUTCDate(currentDate.getUTCDate() + 1);
+  currentValue += Math.random() - 0.5;
+}
+display({date, value})
+```
+
+```js
+//display(data)
+
+```
+
+```js
+/*
+
+//import * as Arrow from "apache-arrow";
+import { Table, Schema, Field, Float32 } from "apache-arrow";
+
+import * as Parquet from "parquet-wasm";
+// Convert the JSON object to an array of objects if it's not already one
+//const data = Array.isArray(dt) ? dt : [dt];
+
+//const table = Arrow.Table.from(data);
+
+// Generate a daily random walk as parallel arrays of {date, value}.
+
+const data = {
+  //siteID: dt.map(d => d.siteID),
+  //dateTime: dt.map(d => d.dateTime),
+  waterTemperature: dt.map(d => d.waterTemperature)
+}
+
+// Define the schema
+const schema0 = new Arrow.Schema({
+  fields: [
+    //Arrow.Field.new({ name: 'siteID', type: new Arrow.Int32() }),
+    //Arrow.Field.new({ name: 'dateTime', type: new Arrow.TimestampMillisecond() }),
+    Arrow.Field.new({ name: 'waterTemperature', type: new Arrow.Float32() })
+  ]
+});
+
+const schema = new Schema([
+  //new Field('siteID', new Int32()),
+  //new Field('dateTime', new TimestampMillisecond()),
+  new Field('waterTemperature', new Float32())
+]);
+
+const table = Table.from([schema, data]);
+
+// Output the Apache Arrow table as a Parquet table to standard out.
+const parquetTable = Parquet.Table.fromIPCStream(Arrow.tableToIPC(table, "stream"));
+const parquetBuilder = new Parquet.WriterPropertiesBuilder().setCompression(Parquet.Compression.ZSTD).build();
+const parquetData = Parquet.writeParquet(parquetTable, parquetBuilder);
+
+
+*/
 ```

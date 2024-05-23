@@ -20,7 +20,7 @@ const selectedAggregators = Generators.input(selectAggregators);
 ```
 
 ## Plot water temperature/discharge
-
+This will be developed futher as needed.
 ```js
 const sites = [...new Set(dt.map(d => d.siteID))].sort();
 const selectSites = (Inputs.select(sites, {value: sites, multiple: 8, width: 100, label: "Select sites"}));

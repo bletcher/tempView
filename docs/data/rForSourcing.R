@@ -1,8 +1,19 @@
 # Note: to force a rerun of this script, run  `rm docs/.observablehq/cache/data/*.csv` and then re-run the dtHOUR_params.R script.
 
+colsToExclude <- c(
+  "siteIDForAir", "hmsProp", "airTemperatureOriginal",
+  "station", "AirTemperature_HOBO_degF", "airPressure",
+  "WaterTemperature_HOBO_DegF", "discharge", "gage"
+)
+
+sitesToInclude <- c(
+  "PA_01FL", "PA_02FL", "PA_03FL", "PA_04FL", "PA_10FL"
+)
+
 getDT <- function(d) {
   d2 <- d |>
     filter(str_detect(Site_ID, "^PA")) |> ################## FOR NOW
+    #filter(Site_ID %in% sitesToInclude) |> ################## FOR NOW
     mutate(
       station = str_sub(Station_No, 4, 13),
       airTemperatureOriginal = (AirTemperature_HOBO_degF - 32) * 5 / 9,
@@ -78,7 +89,8 @@ getDT <- function(d) {
     select(-airTemperatureOriginal)
 
   dOut <- d2 |>
-    left_join(airTemps, by = c("siteIDForAir" = "siteID", "dateTime"))
+    left_join(airTemps, by = c("siteIDForAir" = "siteID", "dateTime")) #|>
+   # dplyr::select(-all_of(colsToExclude))
 
   return(dOut)
 }

@@ -1,15 +1,13 @@
-// Need to learn how to convert from csv to parquet in `Arrow.Table...
-
-import * as Arrow from "apache-arrow";
-import * as Parquet from "parquet-wasm";
-//import {FileAttachment} from "npm:@observablehq/stdlib";
-
 //const dt2 = await FileAttachment("../data/dt.csv").csv({typed: true});
 
 // Convert the JSON object to an array of objects if it's not already one
 //const data = Array.isArray(dt) ? dt2 : [dt2];
 
 //const table = Arrow.Table.from(data);
+
+// Generate a daily random walk as parallel arrays of {date, value}.
+import * as Arrow from "apache-arrow";
+import * as Parquet from "parquet-wasm";
 
 // Generate a daily random walk as parallel arrays of {date, value}.
 const date = [];
