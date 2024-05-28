@@ -8,3 +8,4 @@ yarn-error.log
 .Rproj.user/
 dist/
 docs/data/parquet
+docs/data/*.csv

@@ -8,17 +8,18 @@ Add .R and .RScript to [Path](https://info201.github.io/r-intro.html#windows-com
 
 ## Set up observable framework project
 
-1) In the terminal, go to root directory (one below the subdirectory you will create in the next step)
-2) Run `npm init "@observablehq"` and don't initialize git
-3) In vsCode, open the folder for the project and then publish to a new repo (from the `source control` badge)
-4) 
-8) In the terminal, run `npm run build` to build the site in /dist.  
-8) Copy files from /dist to temperature-viewer S3 bucket 
-10) Do normal commit/push cycle.
+1) In the terminal, go to root directory (one below the subdirectory you will create in the next step).
+2) Run `npm init "@observablehq"` and don't initialize git.
+3) In vsCode, open the folder for the project and then publish to a new repo (from the `source control` badge).
+4) Make changes for deploying suggested [here](https://observablehq.com/framework/deploying#other-hosting-services).  
+5) In the terminal, run `npm run build` to build the site in /dist.  
+6) Copy files from /dist to temperature-viewer S3 bucket.  
+
 
 Notes:
 1) To force rerun of cached objects, run: `rm docs/.observablehq/cache/data/*.*` with approriate changes for specific files or file types.  
-2) Then run `npm run build` and copy files to S3 bucket.  
+2) Run `dtHOUR_params.R` and `dtParquet.R` by hand.  
+3) Then run `npm run build` and copy files to S3 bucket.  
 
 ## From Observable
 

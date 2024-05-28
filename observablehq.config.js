@@ -11,10 +11,10 @@ export default {
        name: "Chapters",
        pages: [
          {name: "Temperature", path: "/temperatureData"},
-         {name: "Temperature2", path: "/temperatureData2"},
-         {name: "Flow and temperature", path: "/temperatureFlowData"},
-         {name: "Parquet test", path: "/parquetTest"},
-         {name: "duckDB test", path: "/duckDBTest"}
+        // {name: "Temperature2", path: "/temperatureData2"},
+         {name: "Flow and temperature", path: "/temperatureFlowData"}
+        // {name: "Parquet test", path: "/parquetTest"},
+        // {name: "duckDB test", path: "/duckDBTest"}
        ]
      }
    ],

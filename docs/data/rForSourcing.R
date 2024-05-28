@@ -9,8 +9,8 @@ getDT <- function(d) {
   )
 
   sitesToInclude <- c(
-    "PA_01FL", "PA_06FL", "PA_10FL", 
-    "PI_01FL", "PI_06FL", "PI_10FL", 
+    "PA_01FL", "PA_06FL", "PA_10FL",
+    "PI_01FL", "PI_06FL", "PI_10FL",
     "SR_01FL", "SR_06FL", "SR_10FL"
   )
 
@@ -93,7 +93,8 @@ getDT <- function(d) {
     select(-airTemperatureOriginal)
 
   dOut <- d2 |>
-    left_join(airTemps, by = c("siteIDForAir" = "siteID", "dateTime")) #|>
+    left_join(airTemps, by = c("siteIDForAir" = "siteID", "dateTime")) |>
+    filter(siteID %in% sitesToInclude)
    # dplyr::select(-all_of(colsToExclude))
 
   return(dOut)

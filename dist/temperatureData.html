@@ -67,14 +67,14 @@
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716906519119});
-registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.38ce73d4.csv","lastModified":1716906328107});
-registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.3261498f.csv","lastModified":1716906506225});
-registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.6db28121.csv","lastModified":1716906510191});
-registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.da936df9.csv","lastModified":1716906515686});
-registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.50a56592.csv","lastModified":1716906345427});
-registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.1a9b4e3a.csv","lastModified":1716906369654});
-registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.9848a8e2.csv","lastModified":1716906357878});
+registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716911604828});
+registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.51be9f7e.csv","lastModified":1716911476353});
+registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.9029e959.csv","lastModified":1716911580061});
+registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.178de193.csv","lastModified":1716911584036});
+registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.7571faf9.csv","lastModified":1716911599646});
+registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.fba657a0.csv","lastModified":1716911491942});
+registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.bebbaf51.csv","lastModified":1716911518312});
+registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.c0fa0dbe.csv","lastModified":1716911505465});
 registerFile("./data/samples.parquet", {"name":"./data/samples.parquet","path":"./_file/data/samples.cb7ab655.parquet","lastModified":1716906520095});
 
 define({id: "48a9579a", outputs: ["plotTimeSeries","plotAirWater","plotWaterDischarge","plotCurve","plotCurveHover","plotPhaseAmp","plotPhaseAmpXY","d3"], body: async () => {
@@ -628,10 +628,7 @@ const parquetData = Parquet.writeParquet(parquetTable, parquetBuilder);
       <summary>Chapters</summary>
       <ol>
     <li class="observablehq-link observablehq-link-active"><a href="./temperatureData.html">Temperature</a></li>
-    <li class="observablehq-link"><a href="./temperatureData2.html">Temperature2</a></li>
     <li class="observablehq-link"><a href="./temperatureFlowData.html">Flow and temperature</a></li>
-    <li class="observablehq-link"><a href="./parquetTest.html">Parquet test</a></li>
-    <li class="observablehq-link"><a href="./duckDBTest.html">duckDB test</a></li>
       </ol>
     </section>
   </ol>
@@ -658,7 +655,7 @@ const parquetData = Parquet.writeParquet(parquetTable, parquetBuilder);
 <div id="cell-58d644e3" class="observablehq observablehq--block"></div>
 <div id="cell-a0e1eeed" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
 <p>The dataset for exploration here is from Shenandoah National Park.<br>
-During development of this application, the dataset is limited to just the thtop and the bottom site for each area ["PA_01FL", "PA_10FL", "PI_01FL", "PI_10FL", "SR_01FL", "SR_10FL"] sites to deal with large file sizes with the whole dataset.<br>
+During development of this application, the dataset is limited to just the thtop and the bottom site for each area ["PA_01FL", "PA_06FL", "PA_10FL", "PI_01FL", "PI_06FL", "PI_10FL", "SR_01FL", "SR_06FL", "SR_10FL"] sites to deal with large file sizes with the whole dataset.<br>
 Eventually, we will likely store the data in <strong>parquet files</strong> and use <strong>duckDB</strong> which can drastically limit file sizes and run times.</p>
 <h2 id="raw-data-summary" tabindex="-1"><a class="observablehq-header-anchor" href="#raw-data-summary">Raw data summary</a></h2>
 <div class="grid grid-cols-4">
@@ -679,7 +676,7 @@ Eventually, we will likely store the data in <strong>parquet files</strong> and 
 <h2 id="filter-the-dataset" tabindex="-1"><a class="observablehq-header-anchor" href="#filter-the-dataset">Filter the dataset</a></h2>
 <p>Filter by sites, years and seasons. Use either the map or the dropdown to select sites.<br>
 Click on a site marker to select or unselect a site. Selected sites will be <span style="color:#eb8117;"><em>orange</em></span>.<br>
-All sites are on the map, but only these sites ["PA_01FL", "PA_10FL", "PI_01FL", "PI_10FL", "SR_01FL", "SR_10FL"] are included in the data for now.</p>
+All sites are on the map, but only these sites ["PA_01FL", "PA_06FL", "PA_10FL", "PI_01FL", "PI_06FL", "PI_10FL", "SR_01FL", "SR_06FL", "SR_10FL"] are included in the data for now.</p>
 <div class="grid grid-cols-4">
   <div class="card grid-colspan-3">
     <span id="cell-51aeabef"><span class="observablehq-loading"></span></span>
@@ -800,7 +797,7 @@ Use the <code>r-square</code> filters in the second column to filter based on r-
 <div id="cell-c16cdcec" class="observablehq observablehq--block"></div>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./"><span>Temperature Data Viewer</span></a><a rel="next" href="./temperatureData2.html"><span>Temperature2</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-28T10:24:34">May 28, 2024</a>.</div>
+<nav><a rel="prev" href="./"><span>Temperature Data Viewer</span></a><a rel="next" href="./temperatureFlowData.html"><span>Flow and temperature</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-28T11:50:47">May 28, 2024</a>.</div>
 </footer>
 </div>

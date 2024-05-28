@@ -25,7 +25,7 @@ display(initialSite)
 ```
 
 The dataset for exploration here is from Shenandoah National Park.  
-During development of this application, the dataset is limited to just the thtop and the bottom site for each area ["PA_01FL", "PA_10FL", "PI_01FL", "PI_10FL", "SR_01FL", "SR_10FL"] sites to deal with large file sizes with the whole dataset.  
+During development of this application, the dataset is limited to just the thtop and the bottom site for each area ["PA_01FL", "PA_06FL", "PA_10FL", "PI_01FL", "PI_06FL", "PI_10FL", "SR_01FL", "SR_06FL", "SR_10FL"] sites to deal with large file sizes with the whole dataset.  
 Eventually, we will likely store the data in **parquet files** and use **duckDB** which can drastically limit file sizes and run times.
 
 ## Raw data summary
@@ -51,7 +51,7 @@ Eventually, we will likely store the data in **parquet files** and use **duckDB*
 
 Filter by sites, years and seasons. Use either the map or the dropdown to select sites.  
 Click on a site marker to select or unselect a site. Selected sites will be <span style="color:#eb8117;">*orange*</span>.  
-All sites are on the map, but only these sites ["PA_01FL", "PA_10FL", "PI_01FL", "PI_10FL", "SR_01FL", "SR_10FL"] are included in the data for now.
+All sites are on the map, but only these sites ["PA_01FL", "PA_06FL", "PA_10FL", "PI_01FL", "PI_06FL", "PI_10FL", "SR_01FL", "SR_06FL", "SR_10FL"] are included in the data for now.
 
 <div class="grid grid-cols-4">
 
@@ -377,7 +377,7 @@ const timeSeriesHover = view(plotTimeSeries(dtFiltered, groupSiteID, selectedSho
 ```
 
 ```js
-//display(timeSeriesHover)
+display(timeSeriesHover)
 ```
 
 ```js

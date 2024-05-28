@@ -224,7 +224,7 @@ export function plotTimeSeries(d, groupSiteID, showWater, showAir, selectedFacet
 }
 
 export function plotCurveHover(dIn, dInPred, timeSeriesHover, groupSiteID,  {width} = {}) {
-
+  const rSquared = "r²";
   const colorScale = Plot.scale({
     color: {
       type: "categorical",
@@ -267,6 +267,7 @@ export function plotCurveHover(dIn, dInPred, timeSeriesHover, groupSiteID,  {wid
       x: {label: "Hour of the day"},
       y: {label: "Temperature (C)"},
       marks: [
+        Plot.frame({stroke: "lightgrey"}),
         Plot.line(d, 
           {
             x: "hour", 
@@ -302,6 +303,26 @@ export function plotCurveHover(dIn, dInPred, timeSeriesHover, groupSiteID,  {wid
           //marker: "circle-stroke"
           //tip: true
         }
+      ),
+      Plot.text(dPred.filter(dd => dd.tempVar === "water"),
+        Plot.selectLast({
+          x: "hour", 
+          y: "predTemp", 
+          fill: "siteID",
+          text: d => `${rSquared}: ${d.rSquared.toFixed(2)}`,  
+          lineAnchor: "bottom", 
+          dy: 0, dx: 22
+        })
+      ),
+      Plot.text(dPred.filter(dd => dd.tempVar === "air"),
+        Plot.selectLast({
+          x: "hour", 
+          y: "predTemp", 
+          fill: "darkgrey",
+          text: d => `${rSquared}: ${d.rSquared.toFixed(2)}`,  
+          lineAnchor: "bottom", 
+          dy: 0, dx: 22
+        })
       )
       ]
     });
