@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Temperature Raw Data Viewer</title>
+<title>Temperature Data Viewer</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
 <link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.css">
@@ -20,7 +20,7 @@ import "./_observablehq/client.js";
 <nav id="observablehq-sidebar">
   <ol>
     <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
-    <li class="observablehq-link observablehq-link-active"><a href="./">Temperature Raw Data Viewer</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./">Temperature Data Viewer</a></li>
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
@@ -29,8 +29,11 @@ import "./_observablehq/client.js";
     <section>
       <summary>Chapters</summary>
       <ol>
-    <li class="observablehq-link"><a href="./temperatureData">Temperature</a></li>
-    <li class="observablehq-link"><a href="./temperatureFlowData">Flow and temperature</a></li>
+    <li class="observablehq-link"><a href="./temperatureData.html">Temperature</a></li>
+    <li class="observablehq-link"><a href="./temperatureData2.html">Temperature2</a></li>
+    <li class="observablehq-link"><a href="./temperatureFlowData.html">Flow and temperature</a></li>
+    <li class="observablehq-link"><a href="./parquetTest.html">Parquet test</a></li>
+    <li class="observablehq-link"><a href="./duckDBTest.html">duckDB test</a></li>
       </ol>
     </section>
   </ol>
@@ -80,12 +83,12 @@ import "./_observablehq/client.js";
 
 </style>
 <div class="hero">
-  <h1>Stream temperature raw data viewer</h1>
+  <h1>Stream temperature data viewer</h1>
   <h2>*DRAFT*</h2>
 </div>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="next" href="./temperatureData"><span>Temperature</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-23T16:15:50">May 23, 2024</a>.</div>
+<nav><a rel="next" href="./temperatureData.html"><span>Temperature</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-28T10:24:34">May 28, 2024</a>.</div>
 </footer>
 </div>

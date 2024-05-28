@@ -45,6 +45,6 @@ toc: false
 </style>
 
 <div class="hero">
-  <h1>Stream temperature raw data viewer</h1>
+  <h1>Stream temperature data viewer</h1>
   <h2>*DRAFT*</h2>
 </div>

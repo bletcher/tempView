@@ -50,12 +50,12 @@ export function plotAirWater(dIn, selectedShowAWLines, {width} = {}) {
     marginRight: 50,
     color: {...colorScale, legend: true, label: "Day of year"},
     //style: {
-    //  backgroundColor: "lightgray",  // Replace "lightgray" with your desired color
+    //  backgroundColor: "lightgray",
     //},
     x: {label: "Air temperature (C)"},
     y: {label: "Water temperature (C)"},
     marks: [
-      Plot.frame(),
+      Plot.frame({stroke: "lightgrey"}),
       Plot.line(dIn, 
         {
           x: "airTemperature", 
@@ -325,12 +325,12 @@ export function plotPhaseAmp(d, {width} = {}) {
     x: {label: "Day of year"},
     y: {axis: "left", label: "Amplitude"},
     marks: [
-      Plot.dot(d.filter(d => d.pMaxMax < 0.05), // only show significant pMaxMax values
+      Plot.frame({stroke: "lightgrey"}),
+      Plot.dot(d,
         {
           x: "yday", 
           y: "amplitudeRatio", 
-          stroke: "grey",
-          //r: d => d.pMaxMax/50,  
+          stroke: "grey", 
           fy: "year",
           fx: "siteID",
           tip: true
@@ -347,20 +347,50 @@ export function plotPhaseAmp(d, {width} = {}) {
         }
       ), 
 
-      Plot.ruleY([0]),
-
-      Plot.dot(d, //.filter(d, => d.pMaxMax < 0.05), // only show significant pMaxMax values
+      Plot.dot(d,
         Plot.mapY((D) => D.map(y2),  
           {
             x: "yday", 
             y: "phaseDiff", 
-            stroke: "#870c10",
-            //alpha: "pMaxMax",//d => d.pMaxMax/50,  
+            stroke: "#870c10",  
             fy: "year",
             fx: "siteID",
             tip: true
           }
       ))
+    ]
+  });
+}
+
+export function plotPhaseAmpXY(d, years, {width} = {}) {
+  
+  const colorScale = Plot.scale({
+    color: {
+      type: "categorical",
+      domain: [...new Set(d.map(d => d.year))].sort(), //years,
+      unknown: "var(--theme-foreground-muted)"
+    }
+  });
+
+  return Plot.plot({
+    width,
+    marginTop: 30,
+    marginRight: 70,
+    color: {...colorScale, legend: true},
+    x: {label: "Phase difference"},
+    y: {axis: "left", label: "Amplitude"},
+    marks: [
+      Plot.frame({stroke: "lightgrey"}),
+      Plot.dot(d,
+        {
+          x: "phaseDiff", 
+          y: "amplitudeRatio", 
+          stroke: "year", 
+          //fy: "year",
+          fy: "siteID",
+          tip: true
+        }
+      )
     ]
   });
 }

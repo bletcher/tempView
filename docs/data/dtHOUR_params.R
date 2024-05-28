@@ -28,10 +28,10 @@ dtHOUR <- dt |>
     #date = unique(date(dateTime)),
     airTemperature = mean(airTemperature, na.rm = TRUE),
     waterTemperature = mean(waterTemperature, na.rm = TRUE),
-    #gage = mean(gage, na.rm = TRUE),
-    #discharge = mean(discharge, na.rm = TRUE),
-    #dischargeLog10 = mean(dischargeLog10, na.rm = TRUE),
-    #airPressure = mean(airPressure, na.rm = TRUE),
+    gage = mean(gage, na.rm = TRUE),
+    discharge = mean(discharge, na.rm = TRUE),
+    dischargeLog10 = mean(dischargeLog10, na.rm = TRUE),
+    airPressure = mean(airPressure, na.rm = TRUE),
     yday = mean(yday, na.rm = TRUE),
     season = unique(season, na.rm = TRUE)
   )

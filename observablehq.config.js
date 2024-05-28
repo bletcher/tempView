@@ -1,7 +1,7 @@
 // See https://observablehq.com/framework/config for documentation.
 export default {
   // The project’s title; used in the sidebar and webpage titles.
-  title: "Temperature Raw Data Viewer",
+  title: "Temperature Data Viewer",
 
   // The pages and sections in the sidebar. If you don’t specify this option,
   // all pages will be listed in alphabetical order. Listing pages explicitly
@@ -11,7 +11,10 @@ export default {
        name: "Chapters",
        pages: [
          {name: "Temperature", path: "/temperatureData"},
-         {name: "Flow and temperature", path: "/temperatureFlowData"}
+         {name: "Temperature2", path: "/temperatureData2"},
+         {name: "Flow and temperature", path: "/temperatureFlowData"},
+         {name: "Parquet test", path: "/parquetTest"},
+         {name: "duckDB test", path: "/duckDBTest"}
        ]
      }
    ],
@@ -24,5 +27,6 @@ export default {
   // pager: true, // whether to show previous & next links in the footer
    root: "docs", // path to the source root for preview
    output: "dist", // path to the output root for build
-   search: true // activate search
+   search: true, // activate search
+   cleanUrls: false // use URLs with .html
 };

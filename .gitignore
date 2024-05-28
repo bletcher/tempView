@@ -6,3 +6,5 @@ yarn-error.log
 *.rds
 *.RData
 .Rproj.user/
+dist/
+docs/data/parquet

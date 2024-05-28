@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Raw flow and temperature data | Temperature Raw Data Viewer</title>
+<title>Temperature Data Viewer</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&amp;display=swap" crossorigin>
 <link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.css">
@@ -12,7 +12,7 @@
 <link rel="modulepreload" href="./_observablehq/client.js">
 <link rel="modulepreload" href="./_observablehq/runtime.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.js">
-<link rel="modulepreload" href="./_import/components/raw_data_flow_temp_plots.536fb703.js">
+<link rel="modulepreload" href="./_import/components/temperatureFlowDataPlots.dfdf63c9.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/_esm.js">
 <link rel="modulepreload" href="./_import/components/variables.3a13d9f2.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.14/_esm.js">
@@ -63,18 +63,18 @@
 import {define} from "./_observablehq/client.js";
 import {registerFile} from "./_observablehq/stdlib.js";
 
-registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716495265629});
-registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.ac6568f2.csv","lastModified":1716495172577});
-registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.b1334a3e.csv","lastModified":1716495252620});
-registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.9994a7d7.csv","lastModified":1716495255654});
-registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.9cb5a404.csv","lastModified":1716495262487});
-registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.177ea851.csv","lastModified":1716495183483});
-registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.0e20b00c.csv","lastModified":1716495199011});
-registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.3b8f1275.csv","lastModified":1716495191387});
-registerFile("./data/samples.parquet", {"name":"./data/samples.parquet","path":"./_file/data/samples.ebd2be2e.parquet","lastModified":1716495266182});
+registerFile("./data/VA_site_info_DL.csv", {"name":"./data/VA_site_info_DL.csv","mimeType":"text/csv","path":"./_file/data/VA_site_info_DL.61104172.csv","lastModified":1716906519119});
+registerFile("./data/dt.csv", {"name":"./data/dt.csv","mimeType":"text/csv","path":"./_file/data/dt.38ce73d4.csv","lastModified":1716906328107});
+registerFile("./data/dtHOUR.csv", {"name":"./data/dtHOUR.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR.3261498f.csv","lastModified":1716906506225});
+registerFile("./data/dtHOUR_ampPhase.csv", {"name":"./data/dtHOUR_ampPhase.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_ampPhase.6db28121.csv","lastModified":1716906510191});
+registerFile("./data/dtHOUR_params_pred.csv", {"name":"./data/dtHOUR_params_pred.csv","mimeType":"text/csv","path":"./_file/data/dtHOUR_params_pred.da936df9.csv","lastModified":1716906515686});
+registerFile("./data/dtYDAY.csv", {"name":"./data/dtYDAY.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY.50a56592.csv","lastModified":1716906345427});
+registerFile("./data/dtYDAY_Month.csv", {"name":"./data/dtYDAY_Month.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Month.1a9b4e3a.csv","lastModified":1716906369654});
+registerFile("./data/dtYDAY_Week.csv", {"name":"./data/dtYDAY_Week.csv","mimeType":"text/csv","path":"./_file/data/dtYDAY_Week.9848a8e2.csv","lastModified":1716906357878});
+registerFile("./data/samples.parquet", {"name":"./data/samples.parquet","path":"./_file/data/samples.cb7ab655.parquet","lastModified":1716906520095});
 
-define({id: "44407bc2", outputs: ["plotWaterDischarge","d3"], body: async () => {
-const [{plotWaterDischarge}, d3] = await Promise.all([import("./_import/components/raw_data_flow_temp_plots.536fb703.js"), import("./_npm/d3@7.9.0/_esm.js")]);
+define({id: "fbc82731", outputs: ["plotWaterDischarge","d3"], body: async () => {
+const [{plotWaterDischarge}, d3] = await Promise.all([import("./_import/components/temperatureFlowDataPlots.dfdf63c9.js"), import("./_npm/d3@7.9.0/_esm.js")]);
 //import * as tidyjs from "npm:tidyjs";
 return {plotWaterDischarge,d3};
 }});
@@ -166,7 +166,7 @@ plotWaterDischarge(aggregatedData)
 <nav id="observablehq-sidebar">
   <ol>
     <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
-    <li class="observablehq-link"><a href="./">Temperature Raw Data Viewer</a></li>
+    <li class="observablehq-link"><a href="./">Temperature Data Viewer</a></li>
   </ol>
   <div id="observablehq-search"><input type="search" placeholder="Search"></div>
   <div id="observablehq-search-results"></div>
@@ -175,8 +175,11 @@ plotWaterDischarge(aggregatedData)
     <section class="observablehq-section-active">
       <summary>Chapters</summary>
       <ol>
-    <li class="observablehq-link"><a href="./temperatureData">Temperature</a></li>
-    <li class="observablehq-link observablehq-link-active"><a href="./temperatureFlowData">Flow and temperature</a></li>
+    <li class="observablehq-link"><a href="./temperatureData.html">Temperature</a></li>
+    <li class="observablehq-link"><a href="./temperatureData2.html">Temperature2</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./temperatureFlowData.html">Flow and temperature</a></li>
+    <li class="observablehq-link"><a href="./parquetTest.html">Parquet test</a></li>
+    <li class="observablehq-link"><a href="./duckDBTest.html">duckDB test</a></li>
       </ol>
     </section>
   </ol>
@@ -192,7 +195,7 @@ plotWaterDischarge(aggregatedData)
 </aside>
 <div id="observablehq-center">
 <main id="observablehq-main" class="observablehq">
-<div id="cell-44407bc2" class="observablehq observablehq--block"></div>
+<div id="cell-fbc82731" class="observablehq observablehq--block"></div>
 <div id="cell-9ee1e068" class="observablehq observablehq--block"></div>
 <div id="cell-97878f4d" class="observablehq observablehq--block"></div>
 <h2 id="plot-water-temperature%2Fdischarge" tabindex="-1"><a class="observablehq-header-anchor" href="#plot-water-temperature%2Fdischarge">Plot water temperature/discharge</a></h2>
@@ -220,11 +223,75 @@ plotWaterDischarge(aggregatedData)
 </div>
 <div id="cell-f5b68d5d" class="observablehq observablehq--block"></div>
 <div id="cell-e15f97bc" class="observablehq observablehq--block"><span class="observablehq-loading"></span></div>
+<pre><code>table(dt0$Site_ID, is.na(dt0$Discharge_Hobo_cfs))
+       FALSE   TRUE
+PA_01FL  77260   2761  
+PA_02FL  67466    746  
+PA_03FL      0  80016  
+PA_04FL      0  80014  
+PA_05FL      0  79975  
+PA_06FL  51432  17212  
+PA_07FL  68017   1873  
+PA_08FL  29769   1867  
+PA_09FL      0  79969  
+PA_10FL      0  79967  
+PI_01FL      0  80166  
+PI_02FL      0  73040  
+PI_03FL      0  80163  
+PI_04FL      0  62733  
+PI_05FL      0  69527  
+PI_06FL      0 110941  
+PI_08FL      0  79399  
+PI_09FL      0  69430  
+PI_10FL      0  80061  
+SR_01FL      0  80119  
+SR_02FL  68660    600  
+SR_03FL  68660  10683  
+SR_04FL      0  80112  
+SR_05FL      0  69725  
+SR_06FL  56437  13132  
+SR_07FL  56588  13127  
+SR_08FL      0  69727  
+SR_09FL  56580  13128  
+SR_10FL      0  69726
+
+table(dt0$Site_ID, is.na(dt0$AirTemperature_HOBO_degF))        
+         FALSE   TRUE  
+PA_01FL  80019      2
+PA_02FL      0  68212
+PA_03FL      0  80016
+PA_04FL      0  80014
+PA_05FL  79975      0
+PA_06FL      0  68644
+PA_07FL      0  69890
+PA_08FL      0  31636
+PA_09FL      0  79969
+PA_10FL  79967      0
+PI_01FL  80166      0
+PI_02FL      0  73040
+PI_03FL      0  80163
+PI_04FL      0  62733
+PI_05FL  69527      0
+PI_06FL      0 110941
+PI_08FL      0  79399
+PI_09FL      0  69430
+PI_10FL  80061      0
+SR_01FL  80119      0
+SR_02FL      0  69260
+SR_03FL      0  79343
+SR_04FL  79344    768
+SR_05FL      0  69725
+SR_06FL      0  69569
+SR_07FL      0  69715
+SR_08FL      0  69727
+SR_09FL      0  69708
+SR_10FL  69726      0
+</code></pre>
 <p><em>Could add images as pop-up</em><br>
 <em>for hysterisis, divide temperature by flow, as in <a href="https://doi.org/10.1016/j.scitotenv.2015.11.028" target="_blank" rel="noopener noreferrer">https://doi.org/10.1016/j.scitotenv.2015.11.028</a>. Add option button</em></p>
 </main>
 <footer id="observablehq-footer">
-<nav><a rel="prev" href="./temperatureData"><span>Temperature</span></a></nav>
-<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-23T16:15:50">May 23, 2024</a>.</div>
+<nav><a rel="prev" href="./temperatureData2.html"><span>Temperature2</span></a><a rel="next" href="./parquetTest.html"><span>Parquet test</span></a></nav>
+<div>Built with <a href="https://observablehq.com/" target="_blank" rel="noopener noreferrer">Observable</a> on <a title="2024-05-28T10:24:34">May 28, 2024</a>.</div>
 </footer>
 </div>

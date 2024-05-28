@@ -1,5 +1,5 @@
-import * as Plot from "../../_npm/@observablehq/plot@0.6.14/_esm.js";
-import { min, max, range } from "../../_npm/d3@7.9.0/_esm.js";
+import * as Plot from "npm:@observablehq/plot";
+import { min, max, range } from "npm:d3";
 
 
 export function plotWaterDischarge(d, {width} = {}) {
@@ -23,6 +23,7 @@ export function plotWaterDischarge(d, {width} = {}) {
     },
     y: {label: "Water temperature (C)"},
     marks: [
+      Plot.frame({ stroke: "lightgrey" }),
       Plot.line(d, 
         {
           x: "dischargeLog10", 

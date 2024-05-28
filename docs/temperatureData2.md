@@ -17,12 +17,27 @@ import {VA_data} from "./components/variables.js";
 ```
 
 ```js
-const initialSite = [...new Set(dt.map(d => d.siteID))].sort()[0];//"PA_01FL";
+const intialSite = [...new Set(dt.map(d => d.siteID))].sort()[0];//"PA_01FL";
 ```
 
 ```js
-display(initialSite)
+const tmp1 = FileAttachment("./data/parquet/siteID=PA_01FL/part-0.parquet").parquet();
+const tmp2 = FileAttachment("./data/parquet/siteID=PA_02FL/part-0.parquet").parquet();
 ```
+
+```js
+display(tmp1)
+```
+
+```sql id=tmp10
+
+SELECT * FROM PA_01FL ORDER BY airTemperature LIMIT 10
+
+```
+
+
+
+
 
 The dataset for exploration here is from Shenandoah National Park.  
 During development of this application, the dataset is limited to just the thtop and the bottom site for each area ["PA_01FL", "PA_10FL", "PI_01FL", "PI_10FL", "SR_01FL", "SR_10FL"] sites to deal with large file sizes with the whole dataset.  
@@ -281,17 +296,12 @@ function updateMarkerStyles(markers) {
       });
     }
   });
-  console.log("updateMarkerStyle", markersSelected.value, markers.filter(d => d.selected).map(d => d.siteID))
+  console.log("updateMarkerStyle", markers.filter(d => d.selected).map(d => d.siteID))
 }
 
 let markers = addMarkers(VA_data);
 addClickListenersToMarkers(markers);
-let markersSelected = Mutable([initialSite]);
-updateMarkerStyles(markers);
-```
-
-```js
-
+let markersSelected = Mutable([intialSite]);
 ```
 
 ```js

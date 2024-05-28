@@ -1,4 +1,3 @@
-# This works but I con't know how to con() or print() the dtPQ object
 library(readr)
 library(lubridate)
 library(here)
@@ -18,12 +17,22 @@ dt0 <- as_tibble(readRDS("./docs/data/dt.EcoDrought.flowtemp.rds")) # includes m
 
 dt <- getDT(dt0)
 
+PQPath <- "./docs/data/parquet"
+
 dt |>
   group_by(siteID) |>
-  write_dataset(path = "./docs/data/parquet", format = "parquet")
+  write_dataset(path = PQPath, format = "parquet")
 
-dtPQ <- open_dataset("./docs/data/parquet", format = "parquet")
+tibble(
+  files = list.files(PQPath, recursive = TRUE),
+  size_MB = file.size(file.path(PQPath, files)) / 1024^2
+)
 
-dtDuckDB <- dtPQ |> to_duckdb()
+
+
+
+#dtPQ <- open_dataset("./docs/data/parquet", format = "parquet")
+
+#dtDuckDB <- dtPQ |> to_duckdb()
 
 #print(dtPQ)

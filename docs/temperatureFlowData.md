@@ -1,10 +1,6 @@
----
-title: Raw flow and temperature data
-toc: true
----
 
 ```js
-import {plotWaterDischarge} from "./components/raw_data_flow_temp_plots.js";
+import {plotWaterDischarge} from "./components/temperatureFlowDataPlots.js";
 import * as d3 from "npm:d3";
 //import * as tidyjs from "npm:tidyjs";
 ```
@@ -86,6 +82,72 @@ const aggregatedData = getAggregatedData(selectedAggregators, dtFiltered, dtYDAY
 ```js
 plotWaterDischarge(aggregatedData)
 ```
+
+    table(dt0$Site_ID, is.na(dt0$Discharge_Hobo_cfs))
+           FALSE   TRUE
+    PA_01FL  77260   2761  
+    PA_02FL  67466    746  
+    PA_03FL      0  80016  
+    PA_04FL      0  80014  
+    PA_05FL      0  79975  
+    PA_06FL  51432  17212  
+    PA_07FL  68017   1873  
+    PA_08FL  29769   1867  
+    PA_09FL      0  79969  
+    PA_10FL      0  79967  
+    PI_01FL      0  80166  
+    PI_02FL      0  73040  
+    PI_03FL      0  80163  
+    PI_04FL      0  62733  
+    PI_05FL      0  69527  
+    PI_06FL      0 110941  
+    PI_08FL      0  79399  
+    PI_09FL      0  69430  
+    PI_10FL      0  80061  
+    SR_01FL      0  80119  
+    SR_02FL  68660    600  
+    SR_03FL  68660  10683  
+    SR_04FL      0  80112  
+    SR_05FL      0  69725  
+    SR_06FL  56437  13132  
+    SR_07FL  56588  13127  
+    SR_08FL      0  69727  
+    SR_09FL  56580  13128  
+    SR_10FL      0  69726
+  
+    table(dt0$Site_ID, is.na(dt0$AirTemperature_HOBO_degF))        
+             FALSE   TRUE  
+    PA_01FL  80019      2
+    PA_02FL      0  68212
+    PA_03FL      0  80016
+    PA_04FL      0  80014
+    PA_05FL  79975      0
+    PA_06FL      0  68644
+    PA_07FL      0  69890
+    PA_08FL      0  31636
+    PA_09FL      0  79969
+    PA_10FL  79967      0
+    PI_01FL  80166      0
+    PI_02FL      0  73040
+    PI_03FL      0  80163
+    PI_04FL      0  62733
+    PI_05FL  69527      0
+    PI_06FL      0 110941
+    PI_08FL      0  79399
+    PI_09FL      0  69430
+    PI_10FL  80061      0
+    SR_01FL  80119      0
+    SR_02FL      0  69260
+    SR_03FL      0  79343
+    SR_04FL  79344    768
+    SR_05FL      0  69725
+    SR_06FL      0  69569
+    SR_07FL      0  69715
+    SR_08FL      0  69727
+    SR_09FL      0  69708
+    SR_10FL  69726      0
+
+
 
 *Could add images as pop-up*  
 *for hysterisis, divide temperature by flow, as in https://doi.org/10.1016/j.scitotenv.2015.11.028. Add option button*  
