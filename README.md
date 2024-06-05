@@ -22,8 +22,8 @@ Notes:
 3) Then run `npm run build` and copy files to S3 bucket.  
 
 ## Data flow
-raw data: "./docs/data/dataIn/dt.EcoDrought.flowtemp.rds"
-data prep: run `getPrepareRData.r` in "./docs/data/r/"
+raw data: "./docs/data/dataIn/dt.EcoDrought.flowtemp.rds"  
+data prep: run `getPrepareRData.r` in "./docs/data/r/"  
 main page: temepratureDataParquet.md
 
 
