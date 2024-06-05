@@ -18,8 +18,15 @@ Add .R and .RScript to [Path](https://info201.github.io/r-intro.html#windows-com
 
 Notes:
 1) To force rerun of cached objects, run: `rm docs/.observablehq/cache/data/*.*` with approriate changes for specific files or file types.  
-2) Run `dtHOUR_params.R` and `dtParquet.R` by hand.  
+2) Run `getPrepareRData.r` by hand.  
 3) Then run `npm run build` and copy files to S3 bucket.  
+
+## Data flow
+raw data: "./docs/data/dataIn/dt.EcoDrought.flowtemp.rds"
+data prep: run `getPrepareRData.r` in "./docs/data/r/"
+main page: temepratureDataParquet.md
+
+
 
 ## From Observable
 
