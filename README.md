@@ -1,3 +1,5 @@
+This is a placehorlder repo that was replaced by https://github.com/bletcher/airWaterTemperatureViewer. It will be deleted once the replacement repo is fully functional.
+
 # Temperature Raw Data Viewer
 
 Setup steps:
